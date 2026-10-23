@@ -87,3 +87,7 @@ A pack is a JSON file containing data only: the fields, their types, allowed val
 ## Modules
 
 `log` · `reducer` · `domain` · `interpreter` · `verifier` · `gate` · `clarify` · `session` · `transcribe` · `cli` · `demo`
+
+## License
+
+MIT. See [LICENSE](LICENSE). SLURP is not included in this repository; its audio is licensed CC BY-NC 4.0 by its authors.
