@@ -1,0 +1,29 @@
+{
+  "name": "takeaway",
+  "description": "Food takeaway or delivery orders spoken to a voice assistant. One entity per order.",
+  "entity_prefix": "order",
+  "label_field": "food_type",
+  "fields": {
+    "food_type": {
+      "type": "list",
+      "criticality": "critical",
+      "description": "each food or cuisine requested, as spoken"
+    },
+    "business_name": {
+      "type": "string",
+      "criticality": "critical",
+      "description": "restaurant, shop, or delivery service, as spoken"
+    },
+    "order_type": {
+      "type": "string",
+      "criticality": "normal",
+      "description": "delivery, takeaway, takeout, pickup, as spoken"
+    }
+  },
+  "thresholds": {
+    "critical": 0.8,
+    "normal": 0.65
+  },
+  "max_questions": 3,
+  "finalization_triggers": []
+}

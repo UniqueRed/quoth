@@ -1,0 +1,733 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quoth Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f6f7f9; --panel: #fff; --ink: #15161c; --muted: #6b6f7c; --faint: #9a9daa; --line: #e7e8ed;
+    --accent: #5b5cf0; --accent-ink: #3f40c9; --accent-soft: #eef0ff; --accent-line: #d9dbfd;
+    --ok: #15803d; --ok-soft: #e9f8ef; --ok-line: #c6ecd4;
+    --warn: #b45309; --warn-soft: #fff6e5; --warn-line: #fbe1ae;
+    --pend: #c2410c; --pend-soft: #ffeee3; --pend-line: #fdd5bd;
+    --bad: #c81e1e; --bad-soft: #fdecec; --bad-line: #f8cccc;
+    --radius: 16px;
+    --shadow: 0 1px 2px rgba(16, 24, 40, .04), 0 6px 20px rgba(16, 24, 40, .05);
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 14.5px/1.5 Inter, -apple-system, system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+  button, input { font: inherit; color: inherit; }
+  h2, h3 { margin: 0; letter-spacing: -.01em; }
+  .muted { color: var(--muted); }
+  .small { font-size: 12.5px; }
+  .hidden { display: none !important; }
+
+  /* Top bar */
+  .top { position: sticky; top: 0; z-index: 5; display: flex; align-items: center; gap: 24px; padding: 12px 28px;
+         background: rgba(255, 255, 255, .82); backdrop-filter: blur(14px); border-bottom: 1px solid var(--line); }
+  .brand { display: flex; align-items: center; gap: 10px; font-weight: 650; font-size: 15.5px; }
+  .brand .logo { width: 28px; height: 28px; border-radius: 9px; display: grid; place-items: center; color: #fff; font-weight: 700;
+                 background: linear-gradient(135deg, #6366f1, #a855f7); box-shadow: 0 2px 8px rgba(99, 102, 241, .35); }
+  .brand .muted { font-weight: 500; }
+  .seg { display: flex; gap: 2px; padding: 3px; background: #eff0f3; border-radius: 11px; }
+  .seg button { border: 0; background: transparent; padding: 5px 12px; border-radius: 8px; font-weight: 500; color: var(--muted); cursor: pointer; text-transform: capitalize; }
+  .seg button:hover { color: var(--ink); }
+  .seg button.active { background: #fff; color: var(--ink); box-shadow: 0 1px 2px rgba(0, 0, 0, .08), 0 0 0 1px rgba(0, 0, 0, .02); }
+  .controls { margin-left: auto; display: flex; align-items: center; gap: 12px; }
+  .field-label { font-size: 12px; color: var(--faint); font-weight: 500; margin-right: 2px; }
+  .speaker { display: flex; align-items: center; gap: 8px; padding: 4px 4px 4px 12px; background: #fff; border: 1px solid var(--line); border-radius: 11px; }
+  .speaker input { width: 110px; border: 0; outline: 0; padding: 3px 6px; background: transparent; font-weight: 500; }
+  body.live .lockable { pointer-events: none; opacity: .5; }
+
+  /* Layout */
+  .layout { display: grid; grid-template-columns: 260px minmax(0, 1fr) 320px; gap: 20px; padding: 24px 28px; max-width: 1440px; margin: 0 auto; align-items: start; }
+  .card { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); padding: 18px; }
+  .card-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 6px 8px; margin-bottom: 12px; }
+  .card-head h3 { white-space: nowrap; }
+  .card-head h3 { font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); }
+  .side { display: flex; flex-direction: column; gap: 20px; }
+
+  /* Scenario list */
+  .scenarios { padding: 14px; position: sticky; top: 76px; }
+  .progress { height: 6px; background: #eff0f3; border-radius: 99px; overflow: hidden; margin: 0 4px 12px; }
+  .progress div { height: 100%; width: 0; background: linear-gradient(90deg, #6366f1, #a855f7); border-radius: 99px; transition: width .4s ease; }
+  #scenario-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 2px; }
+  #scenario-list button { width: 100%; display: flex; align-items: center; gap: 10px; padding: 8px 10px; border: 0; border-radius: 10px; background: transparent; cursor: pointer; text-align: left; }
+  #scenario-list button:hover { background: #f4f5f8; }
+  #scenario-list button.active { background: var(--accent-soft); color: var(--accent-ink); }
+  #scenario-list .num { font: 600 11.5px/1 ui-monospace, SFMono-Regular, Menlo, monospace; color: var(--faint); width: 22px; }
+  #scenario-list .active .num { color: var(--accent); }
+  #scenario-list .label { flex: 1; font-weight: 500; text-transform: capitalize; }
+  .tick { width: 18px; height: 18px; border-radius: 50%; display: grid; place-items: center; font-size: 10.5px; font-weight: 700; background: var(--ok-soft); color: var(--ok); border: 1px solid var(--ok-line); }
+
+  /* Stage */
+  .stage { padding: 26px 28px; }
+  .eyebrow { font-size: 12px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: .06em; }
+  .stage h2 { font-size: 23px; font-weight: 650; margin: 6px 0 20px; }
+  .script { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+  .script li { display: flex; align-items: flex-start; gap: 14px; padding: 12px 14px; border-radius: 12px; border: 1px solid transparent; cursor: pointer; transition: background .15s, border-color .15s; font-size: 16px; }
+  .script li:hover { background: #f8f8fa; }
+  .script .n { flex: none; width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center; font-size: 12.5px; font-weight: 600; border: 1.5px solid var(--line); color: var(--muted); background: #fff; }
+  .script li.current { background: var(--accent-soft); border-color: var(--accent-line); }
+  .script li.current .n { border-color: var(--accent); background: var(--accent); color: #fff; }
+  .script li.done { color: var(--faint); }
+  .script li.done .n { border-color: var(--ok-line); background: var(--ok-soft); color: var(--ok); }
+  .script .when { display: inline-block; margin-right: 8px; padding: 1px 8px; border-radius: 99px; font-size: 12px; font-weight: 500; background: var(--warn-soft); color: var(--warn); border: 1px solid var(--warn-line); vertical-align: 2px; }
+
+  .recorder { display: flex; align-items: center; gap: 18px; margin: 24px 0 18px; padding: 16px 18px; border-radius: 14px; background: #fafafb; border: 1px solid var(--line); }
+  .rec { position: relative; flex: none; width: 64px; height: 64px; border-radius: 50%; border: 0; cursor: pointer; display: grid; place-items: center;
+         background: var(--accent); color: #fff; box-shadow: 0 6px 18px rgba(91, 92, 240, .35); transition: background .2s, transform .1s; }
+  .rec:active { transform: scale(.96); }
+  .rec:disabled { background: #c9cad6; box-shadow: none; cursor: default; }
+  .rec svg { position: relative; z-index: 1; }
+  .rec .stop-icon { display: none; }
+  body.live .rec { background: #ef4444; box-shadow: 0 6px 18px rgba(239, 68, 68, .35); }
+  body.live .rec .mic-icon { display: none; }
+  body.live .rec .stop-icon { display: block; }
+  .ring { position: absolute; inset: 0; border-radius: 50%; background: rgba(239, 68, 68, .22); transform: scale(1); transition: transform .08s linear; }
+  .status { font-weight: 600; font-size: 15.5px; }
+  body.live .status::before { content: ""; display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #ef4444; margin-right: 8px; vertical-align: 1px; animation: blink 1.2s infinite; }
+  @keyframes blink { 50% { opacity: .25; } }
+  .toggle { margin-left: auto; display: flex; align-items: center; gap: 8px; cursor: pointer; user-select: none; color: var(--muted); }
+  .toggle input { accent-color: var(--accent); width: 15px; height: 15px; }
+  kbd { font: 500 11px ui-monospace, Menlo, monospace; padding: 1px 5px; border: 1px solid var(--line); border-bottom-width: 2px; border-radius: 5px; background: #fff; }
+
+  .callout { padding: 14px 16px; border-radius: 12px; margin-bottom: 18px; border: 1px solid; animation: rise .25s ease; }
+  .callout .tag { font-size: 11.5px; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; }
+  .callout .text { font-size: 17px; font-weight: 600; margin-top: 2px; }
+  .callout.ask { background: var(--warn-soft); border-color: var(--warn-line); }
+  .callout.ask .tag { color: var(--warn); }
+  .callout.done { background: var(--ok-soft); border-color: var(--ok-line); }
+  .callout.done .tag { color: var(--ok); }
+  .callout.error { background: var(--bad-soft); border-color: var(--bad-line); }
+  .callout.error .tag { color: var(--bad); }
+  @keyframes rise { from { opacity: 0; transform: translateY(4px); } }
+
+  .chat { display: flex; flex-direction: column; gap: 8px; }
+  .bubble { max-width: 80%; padding: 9px 13px; border-radius: 14px; animation: rise .2s ease; }
+  .bubble .who { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .05em; opacity: .6; }
+  .bubble.you { align-self: flex-end; background: var(--accent-soft); border-bottom-right-radius: 5px; }
+  .bubble.partial { opacity: .6; border: 1px dashed var(--accent-line); }
+  .bubble.agent { align-self: flex-start; background: #f1f2f5; border-bottom-left-radius: 5px; }
+
+  /* Order panel */
+  .legend { display: flex; gap: 8px; flex-wrap: wrap; }
+  .legend span { display: flex; align-items: center; gap: 4px; font-size: 11.5px; color: var(--muted); }
+  .dot { width: 8px; height: 8px; border-radius: 50%; flex: none; }
+  .order { display: flex; flex-direction: column; gap: 10px; }
+  .empty { margin: 4px 0; color: var(--faint); }
+  .line { padding: 12px 14px; border: 1px solid var(--line); border-left-width: 3px; border-radius: 12px; animation: rise .2s ease; }
+  .line .title { display: flex; align-items: center; justify-content: space-between; gap: 8px; font-weight: 600; font-size: 15px; text-transform: capitalize; }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+  .chip { display: inline-flex; align-items: center; gap: 5px; padding: 2px 9px; border-radius: 99px; font-size: 12.5px; font-weight: 500; border: 1px solid; }
+  .pill { font-size: 11px; font-weight: 600; padding: 1px 8px; border-radius: 99px; text-transform: none; }
+  .s-confirmed { --c: var(--ok); --c-soft: var(--ok-soft); --c-line: var(--ok-line); }
+  .s-tentative { --c: var(--warn); --c-soft: var(--warn-soft); --c-line: var(--warn-line); }
+  .s-pending { --c: var(--pend); --c-soft: var(--pend-soft); --c-line: var(--pend-line); }
+  .s-needs_review { --c: var(--bad); --c-soft: var(--bad-soft); --c-line: var(--bad-line); }
+  .s-default { --c: var(--faint); --c-soft: #f6f7f9; --c-line: var(--line); }
+  .chip, .pill { color: var(--c); background: var(--c-soft); border-color: var(--c-line); }
+  .line { border-left-color: var(--c); }
+  .dot { background: var(--c); }
+  .receipt { list-style: none; margin: 0; padding: 0; }
+  .receipt li { display: flex; gap: 10px; padding: 7px 0; border-top: 1px dashed var(--line); }
+  .receipt li:first-child { border-top: 0; }
+  .receipt .qty { font-weight: 600; color: var(--muted); min-width: 26px; }
+  .receipt .item { text-transform: capitalize; font-weight: 500; }
+  .receipt .mods { color: var(--muted); font-size: 13px; }
+
+  /* Result */
+  .result { animation: rise .25s ease; }
+  .verdict { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+  .verdict .badge { width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center; font-size: 20px; font-weight: 700; }
+  .verdict.good .badge { background: var(--ok-soft); color: var(--ok); }
+  .verdict.bad .badge { background: var(--bad-soft); color: var(--bad); }
+  .verdict .big { font-size: 17px; font-weight: 650; }
+  .stats { display: grid; grid-template-columns: 1fr auto auto; gap: 6px 14px; font-size: 13.5px; margin-bottom: 14px; }
+  .stats .h { font-size: 11.5px; color: var(--faint); font-weight: 600; text-transform: uppercase; letter-spacing: .04em; }
+  .stats .v { text-align: right; font-variant-numeric: tabular-nums; }
+  .result audio { width: 100%; height: 36px; margin-bottom: 12px; }
+  .actions { display: flex; gap: 8px; }
+  .btn { flex: 1; padding: 9px 14px; border-radius: 10px; border: 1px solid var(--line); background: #fff; font-weight: 600; cursor: pointer; transition: background .15s; }
+  .btn:hover { background: #f6f7f9; }
+  .btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .btn.primary:hover { background: var(--accent-ink); }
+  .btn.danger { color: var(--bad); }
+  .btn.danger:hover { background: var(--bad-soft); }
+
+  /* Results view */
+  .results { max-width: 1200px; margin: 0 auto; padding: 24px 28px; display: flex; flex-direction: column; gap: 20px; }
+  .tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+  .tile h3 { font-size: 13px; text-transform: capitalize; margin-bottom: 12px; }
+  .tile .compare { display: grid; grid-template-columns: 1fr auto auto; gap: 6px 16px; font-size: 13.5px; }
+  .tile .compare .h { font-size: 11px; color: var(--faint); font-weight: 600; text-transform: uppercase; letter-spacing: .04em; text-align: right; }
+  .tile .compare .v { text-align: right; font-variant-numeric: tabular-nums; font-weight: 600; }
+  .tile .compare .q { color: var(--accent-ink); }
+  .table-wrap { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+  th { text-align: left; font-size: 11.5px; font-weight: 600; color: var(--faint); text-transform: uppercase; letter-spacing: .04em; padding: 0 10px 10px; white-space: nowrap; }
+  td { padding: 10px; border-top: 1px solid var(--line); white-space: nowrap; font-variant-numeric: tabular-nums; }
+  td.yes { color: var(--ok); font-weight: 600; }
+  td.no { color: var(--bad); font-weight: 600; }
+  .icon-btn { border: 1px solid var(--line); background: #fff; border-radius: 8px; padding: 3px 10px; cursor: pointer; font-size: 12.5px; font-weight: 500; }
+  .icon-btn:hover { background: #f6f7f9; }
+  .icon-btn.armed { background: var(--bad); border-color: var(--bad); color: #fff; }
+
+  @media (max-width: 1150px) {
+    .layout { grid-template-columns: 240px minmax(0, 1fr); }
+    .side { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+  }
+  @media (max-width: 780px) {
+    .top { flex-wrap: wrap; gap: 12px; padding: 12px 16px; }
+    .controls { margin-left: 0; width: 100%; flex-wrap: wrap; }
+    .layout, .results { grid-template-columns: 1fr; padding: 16px; }
+    .scenarios { position: static; }
+    .stage { padding: 20px 18px; }
+    .recorder { flex-wrap: wrap; }
+    .toggle { margin-left: 0; }
+  }
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="brand"><span class="logo">Q</span>Quoth <span class="muted">Studio</span></div>
+  <nav class="seg lockable" id="tabs">
+    <button data-view="record" class="active">Record</button>
+    <button data-view="results">Results</button>
+  </nav>
+  <div class="controls lockable">
+    <span class="field-label">Condition</span>
+    <div class="seg" id="conditions"></div>
+    <label class="speaker"><span class="field-label">Speaker</span><input id="speaker" maxlength="24" spellcheck="false" autocomplete="off"></label>
+  </div>
+</header>
+
+<main id="record-view" class="layout">
+  <aside class="card scenarios lockable">
+    <div class="card-head"><h3>Scenarios</h3><span id="progress-label" class="small muted"></span></div>
+    <div class="progress"><div id="progress-bar"></div></div>
+    <ol id="scenario-list"></ol>
+  </aside>
+
+  <section class="card stage">
+    <div class="eyebrow" id="sc-eyebrow"></div>
+    <h2 id="sc-title"></h2>
+    <ol id="script" class="script"></ol>
+
+    <div class="recorder">
+      <button id="rec" class="rec" aria-label="Start or stop recording">
+        <span class="ring" id="ring"></span>
+        <svg class="mic-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg>
+        <svg class="stop-icon" width="20" height="20" viewBox="0 0 20 20"><rect x="4" y="4" width="12" height="12" rx="2.5" fill="currentColor"/></svg>
+      </button>
+      <div>
+        <div id="status" class="status">Ready</div>
+        <div id="hint" class="small muted"></div>
+      </div>
+      <label class="toggle small" title="Uses your browser's voice. Wear headphones so the mic doesn't hear it.">
+        <input type="checkbox" id="speak"> Read replies aloud
+      </label>
+    </div>
+
+    <div id="callout" class="callout hidden"></div>
+    <div id="chat" class="chat"></div>
+  </section>
+
+  <aside class="side">
+    <div class="card">
+      <div class="card-head">
+        <h3>Live order</h3>
+        <div class="legend">
+          <span class="s-confirmed"><i class="dot"></i>confirmed</span>
+          <span class="s-tentative"><i class="dot"></i>tentative</span>
+          <span class="s-pending"><i class="dot"></i>pending</span>
+          <span class="s-needs_review"><i class="dot"></i>review</span>
+        </div>
+      </div>
+      <div id="order" class="order"></div>
+    </div>
+    <div id="result" class="card result hidden"></div>
+    <div class="card">
+      <div class="card-head"><h3>Intended order</h3></div>
+      <ul id="expected" class="receipt"></ul>
+    </div>
+  </aside>
+</main>
+
+<main id="results-view" class="results hidden">
+  <div id="totals" class="tiles"></div>
+  <div class="card">
+    <div class="card-head"><h3>Sessions</h3><span id="session-count" class="small muted"></span></div>
+    <div class="table-wrap"><table id="sessions"></table></div>
+  </div>
+</main>
+
+<script>
+const workletSource = `
+// Emits 16 kHz 16-bit PCM, averaging input samples down if the context runs faster.
+class PcmWriter extends AudioWorkletProcessor {
+  constructor() { super(); this.ratio = sampleRate / 16000; this.pos = 0; this.acc = 0; this.n = 0; this.buffer = []; this.peak = 0; }
+  process(inputs) {
+    const input = inputs[0][0];
+    if (input) {
+      for (const s of input) {
+        this.acc += s; this.n += 1; this.pos += 1;
+        if (this.pos < this.ratio) continue;
+        this.pos -= this.ratio;
+        const v = Math.max(-1, Math.min(1, this.acc / this.n));
+        this.acc = 0; this.n = 0;
+        this.peak = Math.max(this.peak, Math.abs(v));
+        this.buffer.push(v * 0x7fff);
+      }
+      if (this.buffer.length >= 1280) {  // 80 ms at 16 kHz
+        const pcm = Int16Array.from(this.buffer).buffer;
+        this.port.postMessage({ pcm, level: this.peak }, [pcm]);
+        this.buffer = [];
+        this.peak = 0;
+      }
+    }
+    return true;
+  }
+}
+registerProcessor("pcm-writer", PcmWriter);`;
+
+const $ = (id) => document.getElementById(id);
+const store = {
+  get(key, fallback) { try { return localStorage.getItem(key) ?? fallback; } catch { return fallback; } },
+  set(key, value) { try { localStorage.setItem(key, value); } catch {} },
+};
+
+function h(tag, props = {}, ...children) {
+  const el = document.createElement(tag);
+  for (const [key, value] of Object.entries(props)) {
+    if (key === "class") el.className = value;
+    else if (key.startsWith("on")) el[key] = value;
+    else el.setAttribute(key, value);
+  }
+  el.append(...children.flat().filter((c) => c != null && c !== false));
+  return el;
+}
+
+const STATUS_LABEL = { confirmed: "confirmed", tentative: "tentative", pending: "pending", needs_review: "needs review" };
+const label = (id) => id.replace(/^s\d+-/, "").replaceAll("-", " ");
+const number = (id) => id.slice(1, 3);
+const capitalize = (s) => s.charAt(0).toUpperCase() + s.slice(1);
+
+let scenarios = [], conditions = [], results = { sessions: [], totals: {} };
+let current = 0;
+let condition = store.get("condition", "quiet");
+let live = null;          // { ws, stream, ctx } while the mic is open
+let busy = false;         // a session is open (recording or finishing)
+let lineIdx = 0, lastWasQuestion = false;
+let player = null;
+
+const scenario = () => scenarios[current];
+const recorded = (id, cond = condition) => results.sessions.filter((s) => s.scenario === id && s.condition === cond);
+
+async function init() {
+  const data = await (await fetch("/api/scenarios")).json();
+  scenarios = data.scenarios;
+  conditions = data.conditions;
+  if (!conditions.includes(condition)) condition = conditions[0];
+  $("speaker").value = store.get("speaker", "me");
+  $("speak").checked = store.get("speak", "0") === "1";
+  $("speaker").oninput = () => store.set("speaker", $("speaker").value.trim());
+  $("speak").onchange = () => store.set("speak", $("speak").checked ? "1" : "0");
+  $("rec").onclick = (e) => { e.currentTarget.blur(); toggle(); };
+  for (const tab of $("tabs").children) tab.onclick = () => showView(tab.dataset.view);
+  document.addEventListener("keydown", (e) => {
+    if (e.code !== "Space" || e.repeat || e.target.matches("input, textarea, button:not(#rec)")) return;
+    if ($("record-view").classList.contains("hidden")) return;
+    e.preventDefault();
+    toggle();
+  });
+  renderConditions();
+  await refreshResults();
+  const next = scenarios.findIndex((s) => !recorded(s.id).length);
+  select(next === -1 ? 0 : next);
+}
+
+/* ---------- views ---------- */
+
+function showView(view) {
+  for (const tab of $("tabs").children) tab.classList.toggle("active", tab.dataset.view === view);
+  $("record-view").classList.toggle("hidden", view !== "record");
+  $("results-view").classList.toggle("hidden", view !== "results");
+  if (view === "results") refreshResults();
+}
+
+function renderConditions() {
+  $("conditions").replaceChildren(...conditions.map((c) =>
+    h("button", { class: c === condition ? "active" : "", onclick: () => {
+      condition = c;
+      store.set("condition", c);
+      renderConditions();
+      renderList();
+      renderHeader();
+    } }, c)));
+}
+
+function renderList() {
+  $("scenario-list").replaceChildren(...scenarios.map((s, i) => {
+    const n = recorded(s.id).length;
+    return h("li", {}, h("button", { class: i === current ? "active" : "", onclick: () => select(i) },
+      h("span", { class: "num" }, number(s.id)),
+      h("span", { class: "label" }, label(s.id)),
+      n ? h("span", { class: "tick", title: `${n} recorded (${condition})` }, n > 1 ? String(n) : "✓") : null));
+  }));
+  const done = scenarios.filter((s) => recorded(s.id).length).length;
+  $("progress-label").textContent = `${done} / ${scenarios.length} · ${condition}`;
+  $("progress-bar").style.width = `${(100 * done) / scenarios.length}%`;
+}
+
+function renderHeader() {
+  const s = scenario();
+  const n = recorded(s.id).length;
+  $("sc-eyebrow").textContent = `Scenario ${number(s.id)} · ${label(s.id)}${n ? ` · recorded ${n}× ${condition}` : ""}`;
+  $("sc-title").textContent = capitalize(s.tests);
+}
+
+function select(i) {
+  if (busy) return;
+  current = i;
+  lineIdx = 0;
+  lastWasQuestion = false;
+  renderList();
+  renderHeader();
+  renderScript();
+  $("expected").replaceChildren(...scenario().expected.map((line) => h("li", {},
+    h("span", { class: "qty" }, `${line.quantity}×`),
+    h("span", {}, h("span", { class: "item" }, line.item),
+      line.modifiers.length ? h("div", { class: "mods" }, line.modifiers.join(", ")) : null))));
+  $("chat").replaceChildren();
+  $("callout").classList.add("hidden");
+  $("result").classList.add("hidden");
+  renderOrder({ entities: {} });
+  setStatus("Ready", hintHTML());
+}
+
+function hintHTML() {
+  return `Press the button or <kbd>Space</kbd>, then read line 1. Pause after each line.`;
+}
+
+function renderScript() {
+  const lines = scenario().say;
+  $("script").replaceChildren(...lines.map((text, i) => {
+    const m = text.match(/^\((.+?)\)\s*(.*)$/);
+    const cls = i < lineIdx ? "done" : i === lineIdx ? "current" : "";
+    return h("li", { class: cls, title: "Click to mark this as the next line", onclick: () => { lineIdx = i; renderScript(); } },
+      h("span", { class: "n" }, i < lineIdx ? "✓" : String(i + 1)),
+      h("span", {}, m ? h("span", { class: "when" }, m[1]) : null, m ? m[2] : text));
+  }));
+}
+
+function setStatus(title, hint = "") {
+  $("status").textContent = title;
+  $("hint").innerHTML = hint;
+}
+
+function callout(kind, tag, text, sub) {
+  $("callout").className = `callout ${kind}`;
+  $("callout").replaceChildren(...[
+    h("div", { class: "tag" }, tag),
+    h("div", { class: "text" }, text),
+    sub ? h("div", { class: "small muted" }, sub) : null,
+  ].filter(Boolean));
+}
+
+function bubble(who, text) {
+  $("chat").append(h("div", { class: `bubble ${who}` }, h("div", { class: "who" }, who === "you" ? "You" : "Agent"), text));
+}
+
+/* ---------- order state ---------- */
+
+function chip(field, text) {
+  const status = field ? field.status : "default";
+  const title = field?.confidence != null ? `${STATUS_LABEL[status]} · confidence ${field.confidence.toFixed(2)}` : (field ? STATUS_LABEL[status] : "default");
+  return h("span", { class: `chip s-${status}`, title }, text);
+}
+
+function renderOrder(state) {
+  const lines = Object.values(state.entities).filter((e) => !e.removed);
+  if (!lines.length) {
+    $("order").replaceChildren(h("p", { class: "empty" }, busy ? "Listening for items…" : "Nothing yet."));
+    return;
+  }
+  $("order").replaceChildren(...lines.map((entity) => {
+    const { item, quantity, modifiers } = entity.fields;
+    const status = item ? item.status : "pending";
+    const mods = modifiers?.value ?? [];
+    return h("div", { class: `line s-${status}` },
+      h("div", { class: "title" },
+        h("span", {}, item?.value ?? "—"),
+        h("span", { class: `pill s-${status}` }, STATUS_LABEL[status])),
+      h("div", { class: "chips" },
+        chip(quantity, `× ${quantity?.value ?? 1}`),
+        mods.map((m) => chip(modifiers, m))));
+  }));
+}
+
+/* ---------- recording ---------- */
+
+function toggle() {
+  if (live) stop();
+  else if (!busy) start();
+}
+
+async function start() {
+  if (!$("speaker").value.trim()) $("speaker").value = "me";
+  select(current);
+  busy = true;
+  document.body.classList.add("live");
+  setStatus("Connecting…", "Allow microphone access if your browser asks.");
+  let stream;
+  try {
+    stream = await navigator.mediaDevices.getUserMedia({ audio: { channelCount: 1, echoCancellation: true, noiseSuppression: false } });
+  } catch {
+    busy = false;
+    document.body.classList.remove("live");
+    setStatus("Microphone blocked", "Allow microphone access for this page in your browser's site settings, then try again.");
+    return;
+  }
+  let ctx, writer;
+  try {
+    ({ ctx, writer } = await openAudio(stream));
+  } catch (err) {
+    stream.getTracks().forEach((t) => t.stop());
+    busy = false;
+    document.body.classList.remove("live");
+    callout("error", "Audio setup failed", String(err), "Try Chrome, or tell Claude what this says.");
+    setStatus("Error", "");
+    return;
+  }
+
+  const params = new URLSearchParams({ scenario: scenario().id, condition, speaker: $("speaker").value.trim() });
+  const ws = new WebSocket(`${location.protocol === "https:" ? "wss" : "ws"}://${location.host}/ws?${params}`);
+  ws.binaryType = "arraybuffer";
+  live = { ws, stream, ctx };
+  let level = 0, loudest = 0;
+  setTimeout(() => {
+    if (live?.ws === ws && loudest < 0.01) {
+      callout("error", "No sound from the microphone", "The mic is open but silent.", "Check the input device in System Settings → Sound, and that this browser has microphone permission.");
+    }
+  }, 3000);
+  writer.port.onmessage = ({ data }) => {
+    loudest = Math.max(loudest, data.level);
+    level = Math.max(data.level, level * 0.8);
+    $("ring").style.transform = `scale(${1 + Math.min(level * 1.6, 0.9)})`;
+    if (ws.readyState === WebSocket.OPEN) ws.send(data.pcm);
+  };
+  ws.onmessage = (e) => onMessage(JSON.parse(e.data));
+  ws.onclose = (e) => {
+    const unexpected = busy;  // a saved session clears busy before the server closes
+    busy = false;
+    closeMic();
+    if (unexpected) {
+      setStatus("Disconnected", e.reason || "The session ended before it was saved. Press record to try again.");
+    }
+  };
+}
+
+// 16 kHz context where the browser supports it (best quality); otherwise the worklet resamples.
+async function openAudio(stream) {
+  const url = URL.createObjectURL(new Blob([workletSource], { type: "application/javascript" }));
+  for (const options of [{ sampleRate: 16000 }, {}]) {
+    const ctx = new AudioContext(options);
+    try {
+      await ctx.audioWorklet.addModule(url);
+      const writer = new AudioWorkletNode(ctx, "pcm-writer");
+      ctx.createMediaStreamSource(stream).connect(writer);
+      await ctx.resume();
+      return { ctx, writer };
+    } catch (err) {
+      ctx.close();
+      if (!options.sampleRate) throw err;
+    }
+  }
+}
+
+function stop() {
+  if (live?.ws.readyState === WebSocket.OPEN) live.ws.send("stop");
+  closeMic();
+  setStatus("Finishing…", "Wrapping up and scoring the session.");
+}
+
+function closeMic() {
+  if (!live) return;
+  live.stream.getTracks().forEach((t) => t.stop());
+  live.ctx.close();
+  live = null;
+  $("ring").style.transform = "scale(1)";
+  document.body.classList.remove("live");
+  $("rec").disabled = busy;
+}
+
+function onMessage(msg) {
+  if (msg.error) {
+    busy = false;
+    closeMic();
+    $("rec").disabled = false;
+    callout("error", "Something went wrong", msg.error, "Nothing was saved. Check your connection and API keys, then try again.");
+    setStatus("Error", "");
+    return;
+  }
+  if (msg.score) return showResult(msg);
+  if (msg.partial != null) return showPartial(msg.partial);
+
+  if (msg.transcript) {
+    $("chat").querySelector(".partial")?.remove();
+    bubble("you", msg.transcript);
+    const next = scenario().say[lineIdx];
+    if (!lastWasQuestion || next?.startsWith("(")) lineIdx = Math.min(lineIdx + 1, scenario().say.length);
+    renderScript();
+  }
+  const { question, readback, finalized } = msg.reply;
+  if (question) {
+    bubble("agent", question);
+    callout("ask", "Agent asks", question, "Answer out loud for the order you actually want, then carry on with the script.");
+    speak(question);
+  } else if (readback) {
+    bubble("agent", readback);
+    callout("done", "Agent", readback);
+    speak(readback);
+  } else if (msg.transcript) {
+    $("callout").classList.add("hidden");
+  }
+  lastWasQuestion = Boolean(question);
+  renderOrder(msg.state);
+
+  if (finalized) {
+    closeMic();
+    setStatus("Scoring…", "");
+  } else if (live) {
+    setStatus("Listening", lineIdx < scenario().say.length ? `Say line ${lineIdx + 1}, then pause.` : `Say "That's all." to finish.`);
+  }
+}
+
+function showPartial(text) {
+  let el = $("chat").querySelector(".partial");
+  if (!el) {
+    el = h("div", { class: "bubble you partial" }, h("div", { class: "who" }, "Hearing…"), h("span"));
+    $("chat").append(el);
+  }
+  el.lastChild.textContent = text;
+}
+
+function speak(text) {
+  if (!$("speak").checked || !window.speechSynthesis) return;
+  speechSynthesis.cancel();
+  speechSynthesis.speak(new SpeechSynthesisUtterance(text));
+}
+
+async function showResult({ session_id, score }) {
+  busy = false;
+  $("rec").disabled = false;
+  const q = score.quoth, n = score.naive;
+  const v = (c, k) => c[k] ?? 0;
+  const good = Boolean(q.exact);
+  const summary = good ? "Order is exactly right" : [
+    v(q, "wrong_commits") && `${v(q, "wrong_commits")} wrong`,
+    v(q, "flagged") && `${v(q, "flagged")} flagged`,
+    v(q, "missed") && `${v(q, "missed")} missed`,
+  ].filter(Boolean).join(" · ") || "Not an exact match";
+  const row = (name, a, b) => [h("span", {}, name), h("span", { class: "v" }, String(a)), h("span", { class: "v" }, String(b))];
+  $("result").replaceChildren(
+    h("div", { class: `verdict ${good ? "good" : "bad"}` },
+      h("div", { class: "badge" }, good ? "✓" : "!"),
+      h("div", {}, h("div", { class: "big" }, summary), h("div", { class: "small muted" }, "Saved and scored"))),
+    h("div", { class: "stats" },
+      h("span", { class: "h" }, ""), h("span", { class: "h v" }, "Quoth"), h("span", { class: "h v" }, "Naive"),
+      row("Exact order", q.exact ? "yes" : "no", n.exact ? "yes" : "no"),
+      row("Wrong values committed", v(q, "wrong_commits"), v(n, "wrong_commits")),
+      row("Flagged for review", v(q, "flagged"), "—"),
+      row("Questions asked", v(q, "questions"), "—")),
+    h("audio", { controls: "", src: `/sessions/${session_id}/audio`, preload: "metadata" }),
+    h("div", { class: "actions" },
+      h("button", { class: "btn danger", onclick: () => discard(session_id, () => select(current)) }, "Discard & redo"),
+      h("button", { class: "btn primary", onclick: nextScenario }, "Next →")));
+  $("result").classList.remove("hidden");
+  setStatus("Saved", `Press <kbd>Space</kbd> to record again, or go to the next scenario.`);
+  await refreshResults();
+  renderList();
+  renderHeader();
+}
+
+function nextScenario() {
+  const after = scenarios.findIndex((s, i) => i > current && !recorded(s.id).length);
+  const before = scenarios.findIndex((s) => !recorded(s.id).length);
+  select(after !== -1 ? after : before !== -1 ? before : (current + 1) % scenarios.length);
+}
+
+async function discard(name, then) {
+  await fetch(`/api/sessions/${name}`, { method: "DELETE" });
+  await refreshResults();
+  then?.();
+}
+
+/* ---------- results ---------- */
+
+async function refreshResults() {
+  results = await (await fetch("/api/results")).json();
+  renderList();
+  renderResults();
+}
+
+function renderResults() {
+  const groups = Object.keys(results.totals).sort((a, b) => (b === "all") - (a === "all") || conditions.indexOf(a) - conditions.indexOf(b));
+  if (!groups.length) {
+    $("totals").replaceChildren(h("div", { class: "card" }, h("p", { class: "empty" }, "No sessions yet. Record one in the Record tab.")));
+  } else {
+    $("totals").replaceChildren(...groups.map((g) => {
+      const { quoth: q, naive: n } = results.totals[g];
+      const v = (c, k) => c[k] ?? 0;
+      const line = (name, a, b) => [h("span", {}, name), h("span", { class: "v q" }, String(a)), h("span", { class: "v" }, String(b))];
+      return h("div", { class: "card tile" },
+        h("h3", {}, g === "all" ? `All conditions · ${q.sessions} sessions` : `${g} · ${q.sessions} sessions`),
+        h("div", { class: "compare" },
+          h("span", {}), h("span", { class: "h" }, "Quoth"), h("span", { class: "h" }, "Naive"),
+          line("Exact orders", `${v(q, "exact")}/${q.sessions}`, `${v(n, "exact")}/${n.sessions}`),
+          line("Wrong values committed", v(q, "wrong_commits"), v(n, "wrong_commits")),
+          line("Flagged (of them wrong)", `${v(q, "flagged")} (${v(q, "flagged_wrong")})`, "—"),
+          line("Questions asked", v(q, "questions"), "0")));
+    }));
+  }
+
+  const yes = (x) => h("td", { class: x ? "yes" : "no" }, x ? "yes" : "no");
+  const when = (name) => {
+    const m = name.match(/(\d{4})(\d{2})(\d{2})-(\d{2})(\d{2})/);
+    return m ? `${m[2]}/${m[3]} ${m[4]}:${m[5]}` : "";
+  };
+  $("session-count").textContent = `${results.sessions.length} total`;
+  $("sessions").replaceChildren(
+    h("tr", {}, ["Scenario", "Condition", "Speaker", "When", "Quoth exact", "Wrong", "Flagged", "Questions", "Naive exact", "Naive wrong", ""].map((t) => h("th", {}, t))),
+    ...[...results.sessions].reverse().map((s) => {
+      const del = h("button", { class: "icon-btn" }, "Delete");
+      del.onclick = () => del.classList.contains("armed") ? discard(s.name) : (del.classList.add("armed"), del.textContent = "Confirm");
+      return h("tr", {},
+        h("td", {}, `${number(s.scenario)} · ${label(s.scenario)}`),
+        h("td", { style: "text-transform: capitalize" }, s.condition),
+        h("td", {}, s.speaker),
+        h("td", { class: "muted" }, when(s.name)),
+        yes(s.quoth.exact), h("td", {}, String(s.quoth.wrong_commits ?? 0)), h("td", {}, String(s.quoth.flagged ?? 0)),
+        h("td", {}, String(s.quoth.questions ?? 0)),
+        yes(s.naive.exact), h("td", {}, String(s.naive.wrong_commits ?? 0)),
+        h("td", {}, h("button", { class: "icon-btn", onclick: () => play(s.name) }, "▶ Play"), " ", del));
+    }));
+}
+
+function play(name) {
+  player?.pause();
+  player = new Audio(`/sessions/${name}/audio`);
+  player.play();
+}
+
+window.addEventListener("error", (e) => callout("error", "Page error", e.message, "Tell Claude what this says."));
+window.addEventListener("unhandledrejection", (e) => callout("error", "Page error", String(e.reason), "Tell Claude what this says."));
+init();
+</script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Cover</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  html, body { margin: 0; width: 1400px; height: 700px; overflow: hidden; }
+  body { font-family: Inter, -apple-system, sans-serif; color: #15161c;
+         background: radial-gradient(1200px 600px at 85% 20%, #eef0ff 0%, rgba(238,240,255,0) 60%),
+                     radial-gradient(900px 500px at 10% 90%, #fff3ea 0%, rgba(255,243,234,0) 60%), #fbfbfc; }
+  .wrap { position: absolute; inset: 0; padding: 92px 104px; display: grid; grid-template-columns: 1.15fr 1fr; gap: 56px; align-items: center; }
+  .kicker { font-size: 18px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: #5b5cf0; }
+  h1 { font-size: 92px; line-height: 1.02; letter-spacing: -.035em; margin: 22px 0 26px; font-weight: 800; }
+  p { font-size: 26px; line-height: 1.45; color: #52514e; margin: 0; max-width: 620px; }
+  .card { background: #fff; border: 1px solid #e7e8ed; border-radius: 28px; padding: 36px; box-shadow: 0 2px 4px rgba(16,24,40,.04), 0 24px 60px rgba(16,24,40,.08); }
+  .wave { display: flex; align-items: center; gap: 6px; height: 90px; margin-bottom: 28px; }
+  .wave i { display: block; width: 8px; border-radius: 4px; background: #c9cbf9; }
+  .wave i.hot { background: #5b5cf0; }
+  .bubble { display: inline-block; padding: 14px 20px; border-radius: 20px; font-size: 24px; font-weight: 500; }
+  .you { background: #eef0ff; border-bottom-right-radius: 6px; float: right; }
+  .agent { background: #f1f2f5; border-bottom-left-radius: 6px; margin-top: 22px; clear: both; }
+  .who { font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; opacity: .5; margin-bottom: 4px; }
+  .lines { clear: both; display: flex; gap: 12px; margin-top: 26px; }
+  .line { flex: 1; border: 1.5px solid #e7e8ed; border-radius: 16px; padding: 14px 16px; font-size: 19px; font-weight: 600; }
+  .line small { display: block; font-size: 14px; font-weight: 500; color: #8a8984; margin-top: 2px; }
+  .line.q { border-color: #fbe1ae; background: #fff6e5; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div>
+    <div class="kicker">Voice agents · state · trust</div>
+    <h1>“Make that two.”<br>Which one?</h1>
+    <p>Building a voice agent that knows what it heard, keeps track of corrections, and asks only when it should.</p>
+  </div>
+  <div class="card">
+    <div class="wave" id="wave"></div>
+    <div class="bubble you"><div class="who">You</div>Make that two.</div>
+    <div class="bubble agent"><div class="who">Agent</div>Which one did you mean: the cheeseburger or the chocolate shake?</div>
+    <div class="lines">
+      <div class="line">cheeseburger<small>× 1 · confirmed</small></div>
+      <div class="line q">chocolate shake<small>× 2 ? · pending</small></div>
+    </div>
+  </div>
+</div>
+<script>
+  const heights = [14, 22, 36, 58, 44, 70, 86, 62, 40, 28, 52, 74, 90, 66, 38, 24, 46, 68, 54, 30, 18, 34, 50, 28, 16, 12, 20, 32, 18, 10];
+  document.getElementById("wave").innerHTML = heights.map((h, i) => `<i class="${i > 4 && i < 15 ? "hot" : ""}" style="height:${h}px"></i>`).join("");
+</script>
+</body>
+</html>

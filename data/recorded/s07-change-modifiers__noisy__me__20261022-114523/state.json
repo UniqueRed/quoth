@@ -1,0 +1,62 @@
+{
+  "entities": {
+    "line_1": {
+      "fields": {
+        "item": {
+          "confidence": 0.9971,
+          "event_id": "e_003",
+          "evidence": {
+            "end_sec": 1.6800000000000002,
+            "min_word_confidence": 0.9971,
+            "quote": "cheeseburger",
+            "start_sec": 1.12,
+            "utterance_id": "u_001",
+            "word_span": [
+              1,
+              1
+            ]
+          },
+          "field_id": "line_1.item",
+          "history": [],
+          "status": "confirmed",
+          "value": "cheeseburger"
+        },
+        "modifiers": {
+          "confidence": 0.9897,
+          "event_id": "e_014",
+          "evidence": {
+            "end_sec": 32.16,
+            "min_word_confidence": 0.9897,
+            "quote": "I do want pickles. Just no onions.",
+            "start_sec": 30.16,
+            "utterance_id": "u_004",
+            "word_span": [
+              2,
+              8
+            ]
+          },
+          "field_id": "line_1.modifiers",
+          "history": [
+            {
+              "event_id": "e_004",
+              "status": "superseded",
+              "value": [
+                "no pickles",
+                "no onions"
+              ]
+            }
+          ],
+          "status": "confirmed",
+          "value": [
+            "no onions"
+          ]
+        }
+      },
+      "removed": false
+    }
+  },
+  "finalized": true,
+  "open_question": null,
+  "pending_targets": {},
+  "questions_asked": 2
+}

@@ -1,0 +1,99 @@
+{
+  "entities": {
+    "line_1": {
+      "fields": {
+        "item": {
+          "confidence": 1.0,
+          "event_id": "e_003",
+          "evidence": {
+            "end_sec": 3.2800000000000002,
+            "min_word_confidence": 1.0,
+            "quote": "chicken sandwich",
+            "start_sec": 1.92,
+            "utterance_id": "u_001",
+            "word_span": [
+              6,
+              7
+            ]
+          },
+          "field_id": "line_1.item",
+          "history": [],
+          "status": "confirmed",
+          "value": "chicken sandwich"
+        },
+        "modifiers": {
+          "confidence": 1.0,
+          "event_id": "e_004",
+          "evidence": {
+            "end_sec": 5.52,
+            "min_word_confidence": 1.0,
+            "quote": "extra cheese and add bacon",
+            "start_sec": 3.6,
+            "utterance_id": "u_001",
+            "word_span": [
+              9,
+              13
+            ]
+          },
+          "field_id": "line_1.modifiers",
+          "history": [],
+          "status": "confirmed",
+          "value": [
+            "extra cheese",
+            "add bacon"
+          ]
+        }
+      },
+      "removed": false
+    },
+    "line_2": {
+      "fields": {
+        "item": {
+          "confidence": 1.0,
+          "event_id": "e_005",
+          "evidence": {
+            "end_sec": 7.12,
+            "min_word_confidence": 1.0,
+            "quote": "fries.",
+            "start_sec": 6.72,
+            "utterance_id": "u_001",
+            "word_span": [
+              17,
+              17
+            ]
+          },
+          "field_id": "line_2.item",
+          "history": [],
+          "status": "confirmed",
+          "value": "fries"
+        },
+        "modifiers": {
+          "confidence": 1.0,
+          "event_id": "e_006",
+          "evidence": {
+            "end_sec": 6.72,
+            "min_word_confidence": 1.0,
+            "quote": "large",
+            "start_sec": 6.32,
+            "utterance_id": "u_001",
+            "word_span": [
+              16,
+              16
+            ]
+          },
+          "field_id": "line_2.modifiers",
+          "history": [],
+          "status": "confirmed",
+          "value": [
+            "large"
+          ]
+        }
+      },
+      "removed": false
+    }
+  },
+  "finalized": true,
+  "open_question": null,
+  "pending_targets": {},
+  "questions_asked": 0
+}

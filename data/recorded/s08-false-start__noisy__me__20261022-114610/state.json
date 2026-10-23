@@ -1,0 +1,56 @@
+{
+  "entities": {
+    "line_2": {
+      "fields": {
+        "item": {
+          "confidence": 0.9995,
+          "event_id": "e_003",
+          "evidence": {
+            "end_sec": 8.08,
+            "min_word_confidence": 0.9995,
+            "quote": "water?",
+            "start_sec": 7.28,
+            "utterance_id": "u_001",
+            "word_span": [
+              9,
+              9
+            ]
+          },
+          "field_id": "line_2.item",
+          "history": [],
+          "status": "confirmed",
+          "value": "water"
+        }
+      },
+      "removed": false
+    },
+    "line_3": {
+      "fields": {
+        "item": {
+          "confidence": 0.9727,
+          "event_id": "e_007",
+          "evidence": {
+            "end_sec": 18.16,
+            "min_word_confidence": 0.9727,
+            "quote": "strawberry shake",
+            "start_sec": 17.04,
+            "utterance_id": "u_002",
+            "word_span": [
+              6,
+              7
+            ]
+          },
+          "field_id": "line_3.item",
+          "history": [],
+          "status": "confirmed",
+          "value": "strawberry shake"
+        }
+      },
+      "removed": false
+    }
+  },
+  "finalized": true,
+  "open_question": null,
+  "pending_targets": {},
+  "questions_asked": 1
+}

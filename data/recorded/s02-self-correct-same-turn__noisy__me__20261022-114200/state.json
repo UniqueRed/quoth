@@ -1,0 +1,75 @@
+{
+  "entities": {
+    "line_1": {
+      "fields": {
+        "item": {
+          "confidence": 1.0,
+          "event_id": "e_003",
+          "evidence": {
+            "end_sec": 4.16,
+            "min_word_confidence": 1.0,
+            "quote": "chicken sandwiches",
+            "start_sec": 3.2,
+            "utterance_id": "u_001",
+            "word_span": [
+              8,
+              9
+            ]
+          },
+          "field_id": "line_1.item",
+          "history": [],
+          "status": "confirmed",
+          "value": "chicken sandwich"
+        },
+        "quantity": {
+          "confidence": 0.9995,
+          "event_id": "e_004",
+          "evidence": {
+            "end_sec": 3.2,
+            "min_word_confidence": 0.9995,
+            "quote": "three",
+            "start_sec": 2.7199999999999998,
+            "utterance_id": "u_001",
+            "word_span": [
+              7,
+              7
+            ]
+          },
+          "field_id": "line_1.quantity",
+          "history": [],
+          "status": "confirmed",
+          "value": 3
+        }
+      },
+      "removed": false
+    },
+    "line_2": {
+      "fields": {
+        "item": {
+          "confidence": 0.9995,
+          "event_id": "e_005",
+          "evidence": {
+            "end_sec": 4.8,
+            "min_word_confidence": 0.9995,
+            "quote": "lemonade?",
+            "start_sec": 4.72,
+            "utterance_id": "u_001",
+            "word_span": [
+              12,
+              12
+            ]
+          },
+          "field_id": "line_2.item",
+          "history": [],
+          "status": "confirmed",
+          "value": "lemonade"
+        }
+      },
+      "removed": false
+    }
+  },
+  "finalized": true,
+  "open_question": null,
+  "pending_targets": {},
+  "questions_asked": 0
+}

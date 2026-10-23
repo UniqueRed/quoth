@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quoth demo</title>
+<style>
+  body { font: 15px/1.4 system-ui, sans-serif; max-width: 960px; margin: 1rem auto; padding: 0 1rem; color: #222; background: #fff; }
+  .row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  @media (max-width: 700px) { .row { grid-template-columns: 1fr; } }
+  section { border: 1px solid #ccc; border-radius: 6px; padding: .5rem .75rem; margin-bottom: 1rem; }
+  h2 { font-size: 1rem; margin: .25rem 0 .5rem; }
+  #chat p { margin: .25rem 0; }
+  .agent { color: #0645ad; }
+  .field { display: inline-block; margin: 2px; padding: 2px 6px; border-radius: 4px; cursor: pointer; }
+  .confirmed { background: #d4f4d4; }
+  .tentative { background: #fff3c4; }
+  .pending { background: #ffd6a5; }
+  .needs_review { background: #ffb3b3; }
+  #events { font: 12px/1.3 ui-monospace, monospace; max-height: 300px; overflow-y: auto; white-space: pre-wrap; }
+  button { font-size: 1rem; padding: .4rem 1rem; }
+</style>
+</head>
+<body>
+<h1>Quoth</h1>
+<p><button id="mic">Start</button> <span id="status">Idle. Say "that's all" when you are done.</span></p>
+<p>
+  <span class="field confirmed">confirmed</span>
+  <span class="field tentative">tentative</span>
+  <span class="field pending">pending</span>
+  <span class="field needs_review">needs review</span>
+</p>
+<div class="row">
+  <section><h2>Conversation</h2><div id="chat"></div></section>
+  <section><h2>State</h2><div id="state"></div><div id="detail"></div></section>
+</div>
+<section><h2>Event timeline</h2><div id="events"></div></section>
+
+<script>
+const workletSource = `
+class PcmWriter extends AudioWorkletProcessor {
+  constructor() { super(); this.buffer = []; }
+  process(inputs) {
+    const input = inputs[0][0];
+    if (input) {
+      for (const s of input) this.buffer.push(Math.max(-1, Math.min(1, s)) * 0x7fff);
+      if (this.buffer.length >= 1280) {  // 80 ms at 16 kHz
+        this.port.postMessage(Int16Array.from(this.buffer).buffer);
+        this.buffer = [];
+      }
+    }
+    return true;
+  }
+}
+registerProcessor("pcm-writer", PcmWriter);`;
+
+const $ = (id) => document.getElementById(id);
+let ws, audioContext, stream, last;
+
+$("mic").onclick = () => (ws ? stop() : start());
+
+async function start() {
+  stream = await navigator.mediaDevices.getUserMedia({ audio: { channelCount: 1, echoCancellation: true } });
+  audioContext = new AudioContext({ sampleRate: 16000 });
+  const url = URL.createObjectURL(new Blob([workletSource], { type: "application/javascript" }));
+  await audioContext.audioWorklet.addModule(url);
+  const writer = new AudioWorkletNode(audioContext, "pcm-writer");
+  audioContext.createMediaStreamSource(stream).connect(writer);
+
+  ws = new WebSocket(`${location.protocol === "https:" ? "wss" : "ws"}://${location.host}/ws`);
+  ws.binaryType = "arraybuffer";
+  writer.port.onmessage = (e) => ws.readyState === WebSocket.OPEN && ws.send(e.data);
+  ws.onmessage = (e) => render(JSON.parse(e.data));
+  ws.onclose = () => { release(); $("status").textContent = "Session ended."; };
+  $("chat").innerHTML = "";
+  $("detail").innerHTML = "";
+  $("mic").textContent = "Stop";
+  $("status").textContent = "Listening...";
+}
+
+function stop() {
+  if (ws.readyState === WebSocket.OPEN) ws.send("stop");
+  release();
+  $("status").textContent = "Finishing...";
+}
+
+function release() {
+  stream?.getTracks().forEach((t) => t.stop());
+  audioContext?.close();
+  stream = audioContext = null;
+  ws = null;
+  $("mic").textContent = "Start";
+}
+
+function say(cls, text) {
+  const p = document.createElement("p");
+  p.className = cls;
+  p.textContent = text;
+  $("chat").append(p);
+}
+
+function render(msg) {
+  last = msg;
+  if (msg.transcript) say("user", `You: ${msg.transcript}`);
+  const agent = msg.reply.question || msg.reply.readback;
+  if (agent) say("agent", `Agent: ${agent}`);
+
+  const state = $("state");
+  state.innerHTML = "";
+  for (const [id, entity] of Object.entries(msg.state.entities)) {
+    if (entity.removed) continue;
+    const div = document.createElement("div");
+    div.textContent = `${id}: `;
+    for (const field of Object.values(entity.fields)) {
+      const span = document.createElement("span");
+      span.className = `field ${field.status}`;
+      span.textContent = `${field.field_id.split(".")[1]}: ${JSON.stringify(field.value)}`;
+      span.onclick = () => showField(field.field_id);
+      div.append(span);
+    }
+    state.append(div);
+  }
+  $("events").textContent = msg.events.map(eventLine).join("\n");
+  $("events").scrollTop = $("events").scrollHeight;
+}
+
+function eventLine(e) {
+  const detail = e.transcript ?? e.question ?? e.reason ?? (e.op ? `${e.op.op} ${e.op.entity}.${e.op.field} = ${JSON.stringify(e.op.value)}` : "");
+  return `${e.t_sec.toFixed(2).padStart(7)}s ${e.id} ${e.type.padEnd(22)} ${detail || ""}`;
+}
+
+function showField(fieldId) {
+  const [entityId, name] = fieldId.split(".");
+  const field = last.state.entities[entityId].fields[name];
+  const ev = field.evidence;
+  const detail = $("detail");
+  detail.innerHTML = "";
+  const lines = [
+    `${fieldId} = ${JSON.stringify(field.value)} [${field.status}]`,
+    `Quote: "${ev.quote}" (${ev.utterance_id}, words ${ev.word_span.join("-")})`,
+    `Time: ${ev.start_sec.toFixed(2)}s - ${ev.end_sec.toFixed(2)}s`,
+    `Field confidence: ${field.confidence ?? "n/a"}, min word confidence: ${ev.min_word_confidence}`,
+    ...field.history.map((h) => `Earlier: ${JSON.stringify(h.value)} [${h.status}] (${h.event_id})`),
+  ];
+  for (const line of lines) {
+    const p = document.createElement("p");
+    p.textContent = line;
+    detail.append(p);
+  }
+  if (last.has_audio) {
+    const audio = document.createElement("audio");
+    audio.controls = true;
+    audio.src = `/sessions/${last.session_id}/audio#t=${ev.start_sec},${ev.end_sec}`;
+    detail.append(audio);
+  }
+}
+</script>
+</body>
+</html>

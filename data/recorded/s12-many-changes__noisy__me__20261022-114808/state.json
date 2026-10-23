@@ -1,0 +1,188 @@
+{
+  "entities": {
+    "line_1": {
+      "fields": {
+        "item": {
+          "confidence": 0.9907,
+          "event_id": "e_003",
+          "evidence": {
+            "end_sec": 3.44,
+            "min_word_confidence": 0.9907,
+            "quote": "fries,",
+            "start_sec": 2.4,
+            "utterance_id": "u_001",
+            "word_span": [
+              6,
+              6
+            ]
+          },
+          "field_id": "line_1.item",
+          "history": [],
+          "status": "confirmed",
+          "value": "fries"
+        },
+        "quantity": {
+          "confidence": 1.0,
+          "event_id": "e_004",
+          "evidence": {
+            "end_sec": 2.4,
+            "min_word_confidence": 1.0,
+            "quote": "two",
+            "start_sec": 2.24,
+            "utterance_id": "u_001",
+            "word_span": [
+              5,
+              5
+            ]
+          },
+          "field_id": "line_1.quantity",
+          "history": [],
+          "status": "confirmed",
+          "value": 2
+        }
+      },
+      "removed": false
+    },
+    "line_2": {
+      "fields": {
+        "item": {
+          "confidence": 1.0,
+          "event_id": "e_008",
+          "evidence": {
+            "end_sec": 13.04,
+            "min_word_confidence": 1.0,
+            "quote": "hamburgers,",
+            "start_sec": 12.24,
+            "utterance_id": "u_002",
+            "word_span": [
+              4,
+              4
+            ]
+          },
+          "field_id": "line_2.item",
+          "history": [],
+          "status": "confirmed",
+          "value": "hamburger"
+        },
+        "quantity": {
+          "confidence": 1.0,
+          "event_id": "e_025",
+          "evidence": {
+            "end_sec": 58.16,
+            "min_word_confidence": 1.0,
+            "quote": "only two",
+            "start_sec": 57.76,
+            "utterance_id": "u_006",
+            "word_span": [
+              2,
+              3
+            ]
+          },
+          "field_id": "line_2.quantity",
+          "history": [
+            {
+              "event_id": "e_009",
+              "status": "superseded",
+              "value": 3
+            }
+          ],
+          "status": "confirmed",
+          "value": 2
+        }
+      },
+      "removed": false
+    },
+    "line_3": {
+      "fields": {
+        "item": {
+          "confidence": 1.0,
+          "event_id": "e_018",
+          "evidence": {
+            "end_sec": 39.84,
+            "min_word_confidence": 1.0,
+            "quote": "colas.",
+            "start_sec": 39.28,
+            "utterance_id": "u_004",
+            "word_span": [
+              6,
+              6
+            ]
+          },
+          "field_id": "line_3.item",
+          "history": [],
+          "status": "confirmed",
+          "value": "cola"
+        },
+        "quantity": {
+          "confidence": 1.0,
+          "event_id": "e_019",
+          "evidence": {
+            "end_sec": 39.2,
+            "min_word_confidence": 1.0,
+            "quote": "three",
+            "start_sec": 38.88,
+            "utterance_id": "u_004",
+            "word_span": [
+              5,
+              5
+            ]
+          },
+          "field_id": "line_3.quantity",
+          "history": [],
+          "status": "confirmed",
+          "value": 3
+        }
+      },
+      "removed": false
+    },
+    "line_4": {
+      "fields": {
+        "item": {
+          "confidence": 0.7632,
+          "event_id": "e_028",
+          "evidence": {
+            "end_sec": 63.28,
+            "min_word_confidence": 0.7632,
+            "quote": "iced tea",
+            "start_sec": 62.96,
+            "utterance_id": "u_007",
+            "word_span": [
+              2,
+              3
+            ]
+          },
+          "field_id": "line_4.item",
+          "history": [],
+          "status": "needs_review",
+          "value": "iced tea"
+        },
+        "modifiers": {
+          "confidence": 0.9873,
+          "event_id": "e_029",
+          "evidence": {
+            "end_sec": 64.08,
+            "min_word_confidence": 0.9873,
+            "quote": "no ice",
+            "start_sec": 63.28,
+            "utterance_id": "u_007",
+            "word_span": [
+              4,
+              5
+            ]
+          },
+          "field_id": "line_4.modifiers",
+          "history": [],
+          "status": "confirmed",
+          "value": [
+            "no ice"
+          ]
+        }
+      },
+      "removed": false
+    }
+  },
+  "finalized": true,
+  "open_question": null,
+  "pending_targets": {},
+  "questions_asked": 3
+}

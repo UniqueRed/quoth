@@ -1,0 +1,12 @@
+.venv/
+__pycache__/
+*.egg-info/
+sessions/
+.env
+# Downloaded datasets and raw audio stay local; recorded session logs are kept for replay.
+data/*
+!data/recorded/
+data/recorded/*/audio/
+data/recorded/*/raw_transcriber.jsonl
+article/src/studio-replay.html
+.DS_Store

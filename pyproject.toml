@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "quoth"
+version = "0.1.0"
+description = "A state engine for voice agents: every spoken fact is an event with audio evidence and calibrated confidence."
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "anthropic>=2.1",
+    "python-dotenv>=1.0",
+    "websockets>=14",
+]
+
+[project.optional-dependencies]
+demo = ["fastapi>=0.110", "uvicorn>=0.29"]
+mic = ["sounddevice>=0.4"]
+dev = ["pytest>=8", "httpx>=0.27", "fastapi>=0.110"]
+article = ["matplotlib>=3.8", "markdown>=3.5"]
+
+[project.scripts]
+quoth = "quoth.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["quoth*"]
+
+[tool.setuptools.package-data]
+quoth = ["packs/*.json", "prompts/*.md", "demo_static/*"]

@@ -1,0 +1,1286 @@
+[
+ {
+  "slurp_id": 87,
+  "split": "train",
+  "sentence": "please order some sushi for dinner",
+  "gold": {
+   "food_type": [
+    "sushi"
+   ],
+   "business_name": [],
+   "order_type": []
+  },
+  "recordings": {
+   "headset": "audio-1502896896-headset.flac",
+   "distant": "audio-1502896896.flac"
+  }
+ },
+ {
+  "slurp_id": 88,
+  "split": "train",
+  "sentence": "hey i'd like you to order burger",
+  "gold": {
+   "food_type": [
+    "burger"
+   ],
+   "business_name": [],
+   "order_type": []
+  },
+  "recordings": {
+   "headset": "audio-1501685535-headset.flac",
+   "distant": "audio-1501685535.flac"
+  }
+ },
+ {
+  "slurp_id": 89,
+  "split": "test",
+  "sentence": "could you order sushi for tonight dinner",
+  "gold": {
+   "food_type": [
+    "sushi"
+   ],
+   "business_name": [],
+   "order_type": []
+  },
+  "recordings": {
+   "headset": "audio-1501765540-headset.flac",
+   "distant": "audio-1501765540.flac"
+  }
+ },
+ {
+  "slurp_id": 130,
+  "split": "train",
+  "sentence": "order a pizza",
+  "gold": {
+   "food_type": [
+    "pizza"
+   ],
+   "business_name": [],
+   "order_type": []
+  },
+  "recordings": {
+   "headset": "audio-1434532619-headset.flac",
+   "distant": "audio-1434532619.flac"
+  }
+ },
+ {
+  "slurp_id": 131,
+  "split": "train",
+  "sentence": "order me a byron from deliveroo",
+  "gold": {
+   "food_type": [
+    "byron"
+   ],
+   "business_name": [
+    "deliveroo"
+   ],
+   "order_type": []
+  },
+  "recordings": {
+   "headset": "audio-1502099518-headset.flac",
+   "distant": "audio-1502099518.flac"
+  }
+ },
+ {
+  "slurp_id": 132,
+  "split": "test",
+  "sentence": "order a takeaway",
+  "gold": {
+   "food_type": [],
+   "business_name": [],
+   "order_type": [
+    "takeaway"
+   ]
+  },
+  "recordings": {
+   "headset": "audio-1502200532-headset.flac",
+   "distant": "audio-1502200532.flac"
+  }
+ },
+ {
+  "slurp_id": 200,
+  "split": "train",
+  "sentence": "can i order takeaway from spanish place",
+  "gold": {
+   "food_type": [
+    "spanish"
+   ],
+   "business_name": [],
+   "order_type": [
+    "takeaway"
+   ]
+  },
+  "recordings": {
+   "headset": "audio-1490104457-headset.flac",
+   "distant": "audio-1490104457.flac"
+  }
+ },
+ {
+  "slurp_id": 305,
+  "split": "train",
+  "sentence": "order a pizza from pizza express",
+  "gold": {
+   "food_type": [
+    "pizza"
+   ],
+   "business_name": [
+    "pizza express"
+   ],
+   "order_type": []
+  },
+  "recordings": {
+   "headset": "audio-1501158460-headset.flac",
+   "distant": "audio-1488637803.flac"
+  }
+ },
+ {
+  "slurp_id": 306,
+  "split": "train",
+  "sentence": "i would like to have a sushi can you order me a lunch",
+  "gold": {
+   "food_type": [
+    "sushi"
+   ],
+   "business_name": [],
+   "order_type": []
+  },
+  "recordings": {
+   "headset": "audio-1490800076-headset.flac",
+   "distant": "audio-1490800076.flac"
+  }
+ },
+ {
+  "slurp_id": 307,
+  "split": "train",
+  "sentence": "alexa i would like to have a sushi can you order me a lunch",
+  "gold": {
+   "food_type": [
+    "sushi"
+   ],
+   "business_name": [],
+   "order_type": []
+  },
+  "recordings": {
+   "headset": "audio-1494548786-headset.flac",
+   "distant": "audio-1494548786.flac"
+  }
+ },
+ {
+  "slurp_id": 308,
+  "split": "train",
+  "sentence": "order a takeaway sandwich and soup from the italian's",
+  "gold": {
+   "food_type": [
+    "sandwich",
+    "soup"
+   ],
+   "business_name": [
+    "italian 's"
+   ],
+   "order_type": [
+    "takeaway"
+   ]
+  },
+  "recordings": {
+   "headset": "audio-1490367975-headset.flac",
+   "distant": "audio-1488905475.flac"
+  }
+ },
+ {
+  "slurp_id": 668,
+  "split": "test",
+  "sentence": "i want two burgers and one coke order it fast",
+  "gold": {
+   "food_type": [
+    "burgers",
+    "coke"
+   ],
+   "business_name": [],
+   "order_type": []
+  },
+  "recordings": {
+   "headset": "audio-1500899673-headset.flac",
+   "distant": "audio-1500899673.flac"
+  }
+ },
+ {
+  "slurp_id": 669,
+  "split": "train",
+  "sentence": "order two hamburgers for me",
+  "gold": {
+   "food_type": [
+    "hamburgers"
+   ],
+   "business_name": [],
+   "order_type": []
+  },
+  "recordings": {
+   "headset": "audio-1502198982-headset.flac",
+   "distant": "audio-1502198982.flac"
+  }
+ },
+ {
+  "slurp_id": 670,
+  "split": "train",
+  "sentence": "place order of one pizza",
+  "gold": {
+   "food_type": [
+    "pizza"
+   ],
+   "business_name": [],
+   "order_type": []
+  },
+  "recordings": {
+   "headset": "audio-1490263399-headset.flac",
+   "distant": "audio-1490263399.flac"
+  }
+ },
+ {
+  "slurp_id": 840,
+  "split": "train",
+  "sentence": "order takeout pizza from domino's for seven pm",
+  "gold": {
+   "food_type": [
+    "pizza"
+   ],
+   "business_name": [
+    "domino 's"
+   ],
+   "order_type": []
+  },
+  "recordings": {
+   "headset": "audio-1490371881-headset.flac",
+   "distant": "audio-1488970788.flac"
+  }
+ },
+ {
+  "slurp_id": 841,
+  "split": "train",
+  "sentence": "place order to pizza takeout for seven pm",
+  "gold": {
+   "food_type": [
+    "pizza"
+   ],
+   "business_name": [],
+   "order_type": []
+  },
+  "recordings": {
+   "headset": "audio-1490203001-headset.flac",
+   "distant": "audio-1490203001.flac"
+  }
+ },
+ {
+  "slurp_id": 842,
+  "split": "train",
+  "sentence": "schedule pizza takeout for seven pm",
+  "gold": {
+   "food_type": [
+    "pizza"
+   ],
+   "business_name": [],
+   "order_type": []
+  },
+  "recordings": {
+   "headset": "audio-1502309098-headset.flac",
+   "distant": "audio-1502309098.flac"
+  }
+ },
+ {
+  "slurp_id": 1043,
+  "split": "test",
+  "sentence": "call the nearest thai restaurant with delivery",
+  "gold": {
+   "food_type": [
+    "thai"
+   ],
+   "business_name": [],
+   "order_type": [
+    "delivery"
+   ]
+  },
+  "recordings": {
+   "headset": "audio-1501687515-headset.flac",
+   "distant": "audio-1501687515.flac"
+  }
+ },
+ {
+  "slurp_id": 1044,
+  "split": "train",
+  "sentence": "what is the best pizza near me that delivers",
+  "gold": {
+   "food_type": [
+    "pizza"
+   ],
+   "business_name": [],
+   "order_type": [
+    "delivers"
+   ]
+  },
+  "recordings": {
+   "headset": "audio-1497862852-headset.flac",
+   "distant": "audio-1497862852.flac"
+  }
+ },
+ {
+  "slurp_id": 1138,
+  "split": "train",
+  "sentence": "call eastwind and order lomaine to go",
+  "gold": {
+   "food_type": [
+    "lomaine"
+   ],
+   "business_name": [
+    "eastwind"
+   ],
+   "order_type": [
+    "to go"
+   ]
+  },
+  "recordings": {
+   "headset": "audio-1495733915-headset.flac",
+   "distant": "audio-1495733915.flac"
+  }
+ },
+ {
+  "slurp_id": 1139,
+  "split": "train",
+  "sentence": "place a take out order at olive garden",
+  "gold": {
+   "food_type": [],
+   "business_name": [
+    "olive garden"
+   ],
+   "order_type": [
+    "take out"
+   ]
+  },
+  "recordings": {
+   "headset": "audio-1490108807-headset.flac",
+   "distant": "audio-1490108807.flac"
+  }
+ },
+ {
+  "slurp_id": 1140,
+  "split": "train",
+  "sentence": "order spaghetti from spaghetti warehouse to bring home",
+  "gold": {
+   "food_type": [
+    "spaghetti"
+   ],
+   "business_name": [
+    "spaghetti warehouse"
+   ],
+   "order_type": [
+    "bring home"
+   ]
+  },
+  "recordings": {
+   "headset": "audio-1490288478-headset.flac",
+   "distant": "audio-1490288478.flac"
+  }
+ },
+ {
+  "slurp_id": 1230,
+  "split": "train",
+  "sentence": "order me a large ham and olive pizza from dominos",
+  "gold": {
+   "food_type": [
+    "ham and olive pizza"
+   ],
+   "business_name": [
+    "dominos"
+   ],
+   "order_type": []
+  },
+  "recordings": {
+   "headset": "audio-1501158221-headset.flac",
+   "distant": "audio-1501158221.flac"
+  }
+ },
+ {
+  "slurp_id": 1231,
+  "split": "train",
+  "sentence": "can you direct me to the menu for the highest rated chinese carryout near me",
+  "gold": {
+   "food_type": [
+    "chinese"
+   ],
+   "business_name": [],
+   "order_type": [
+    "carryout"
+   ]
+  },
+  "recordings": {
+   "headset": "audio-1501758652-headset.flac",
+   "distant": "audio-1501758652.flac"
+  }
+ },
+ {
+  "slurp_id": 1232,
+  "split": "train",
+  "sentence": "give me options for indian carryout under dollars",
+  "gold": {
+   "food_type": [
+    "indian"
+   ],
+   "business_name": [],
+   "order_type": [
+    "carryout"
+   ]
+  },
+  "recordings": {
+   "headset": "audio-1490110594-headset.flac",
+   "distant": "audio-1490110594.flac"
+  }
+ },
+ {
+  "slurp_id": 1416,
+  "split": "devel",
+  "sentence": "order some takeaway food",
+  "gold": {
+   "food_type": [],
+   "business_name": [],
+   "order_type": [
+    "takeaway"
+   ]
+  },
+  "recordings": {
+   "headset": "audio-1490195789-headset.flac",
+   "distant": "audio-1490195789.flac"
+  }
+ },
+ {
+  "slurp_id": 1417,
+  "split": "train",
+  "sentence": "places to order takeaway food",
+  "gold": {
+   "food_type": [],
+   "business_name": [],
+   "order_type": [
+    "takeaway"
+   ]
+  },
+  "recordings": {
+   "headset": "audio-1500038321-headset.flac",
+   "distant": "audio-1500898421.flac"
+  }
+ },
+ {
+  "slurp_id": 1459,
+  "split": "train",
+  "sentence": "order a large pepperoni pizza from dominos to go",
+  "gold": {
+   "food_type": [],
+   "business_name": [
+    "dominos"
+   ],
+   "order_type": [
+    "pepperoni pizza"
+   ]
+  },
+  "recordings": {
+   "headset": "audio-1497439232-headset.flac",
+   "distant": "audio-1488989649.flac"
+  }
+ },
+ {
+  "slurp_id": 1461,
+  "split": "train",
+  "sentence": "place a takeaway order for a cheeseburger and fries from burger king",
+  "gold": {
+   "food_type": [
+    "cheeseburger and fries"
+   ],
+   "business_name": [
+    "burger king"
+   ],
+   "order_type": [
+    "takeaway"
+   ]
+  },
+  "recordings": {
+   "headset": "audio-1489672182-headset.flac",
+   "distant": "audio-1489672182.flac"
+  }
+ },
+ {
+  "slurp_id": 1516,
+  "split": "test",
+  "sentence": "order a pizza with sausage from domino's",
+  "gold": {
+   "food_type": [
+    "pizza"
+   ],
+   "business_name": [
+    "domino 's"
+   ],
+   "order_type": []
+  },
+  "recordings": {
+   "headset": "audio--1505404321-headset.flac",
+   "distant": "audio--1505404321.flac"
+  }
+ },
+ {
+  "slurp_id": 1517,
+  "split": "train",
+  "sentence": "order a ham and cheese sandwich from subway",
+  "gold": {
+   "food_type": [
+    "ham and cheese sandwich"
+   ],
+   "business_name": [
+    "subway"
+   ],
+   "order_type": []
+  },
+  "recordings": {
+   "headset": "audio-1490360583-headset.flac",
+   "distant": "audio-1490360583.flac"
+  }
+ },
+ {
+  "slurp_id": 1518,
+  "split": "train",
+  "sentence": "order a smoked meat platter from beanos",
+  "gold": {
+   "food_type": [
+    "smoked meat platter"
+   ],
+   "business_name": [
+    "beanos"
+   ],
+   "order_type": []
+  },
+  "recordings": {
+   "headset": "audio-1501687122-headset.flac",
+   "distant": "audio-1501687122.flac"
+  }
+ },
+ {
+  "slurp_id": 1629,
+  "split": "train",
+  "sentence": "free home delivery",
+  "gold": {
+   "food_type": [],
+   "business_name": [],
+   "order_type": [
+    "delivery"
+   ]
+  },
+  "recordings": {
+   "headset": "audio-1501752239-headset.flac",
+   "distant": "audio-1501752239.flac"
+  }
+ },
+ {
+  "slurp_id": 1730,
+  "split": "train",
+  "sentence": "checkout domino centre near me and order cheese pizza",
+  "gold": {
+   "food_type": [
+    "cheese pizza"
+   ],
+   "business_name": [
+    "domino"
+   ],
+   "order_type": []
+  },
+  "recordings": {
+   "headset": "audio-1494418064-headset.flac",
+   "distant": "audio-1494418064.flac"
+  }
+ },
+ {
+  "slurp_id": 1743,
+  "split": "train",
+  "sentence": "find and order rasgulla of janta sweet home pvt ltd",
+  "gold": {
+   "food_type": [
+    "rasgulla"
+   ],
+   "business_name": [
+    "janta sweet home pvt ltd"
+   ],
+   "order_type": []
+  },
+  "recordings": {
+   "headset": "audio-1501696562-headset.flac",
+   "distant": "audio-1501696562.flac"
+  }
+ },
+ {
+  "slurp_id": 1830,
+  "split": "test",
+  "sentence": "i want to eat some spicy thing",
+  "gold": {
+   "food_type": [
+    "spicy"
+   ],
+   "business_name": [],
+   "order_type": []
+  },
+  "recordings": {
+   "headset": "audio-1497883784-headset.flac",
+   "distant": "audio-1497883784.flac"
+  }
+ },
+ {
+  "slurp_id": 1831,
+  "split": "test",
+  "sentence": "order one pizza from pizza hut",
+  "gold": {
+   "food_type": [
+    "pizza"
+   ],
+   "business_name": [
+    "pizza hut"
+   ],
+   "order_type": []
+  },
+  "recordings": {
+   "headset": "audio-1490108114-headset.flac",
+   "distant": "audio-1490108114.flac"
+  }
+ },
+ {
+  "slurp_id": 1846,
+  "split": "train",
+  "sentence": "hey google hey call the nearest chinese restaurant for a takeaway",
+  "gold": {
+   "food_type": [
+    "chinese"
+   ],
+   "business_name": [],
+   "order_type": [
+    "takeaway"
+   ]
+  },
+  "recordings": {
+   "headset": "audio-1490181249-headset.flac",
+   "distant": "audio-1490181249.flac"
+  }
+ },
+ {
+  "slurp_id": 1847,
+  "split": "train",
+  "sentence": "order me a cheese burger from tommy's burgers",
+  "gold": {
+   "food_type": [
+    "cheese burger"
+   ],
+   "business_name": [
+    "tommy 's burgers"
+   ],
+   "order_type": []
+  },
+  "recordings": {
+   "headset": "audio-1502114669-headset.flac",
+   "distant": "audio-1502114669.flac"
+  }
+ },
+ {
+  "slurp_id": 2090,
+  "split": "train",
+  "sentence": "call peking garden",
+  "gold": {
+   "food_type": [],
+   "business_name": [
+    "peking garden"
+   ],
+   "order_type": []
+  },
+  "recordings": {
+   "headset": "audio-1501688799-headset.flac",
+   "distant": "audio-1488984847.flac"
+  }
+ },
+ {
+  "slurp_id": 2099,
+  "split": "train",
+  "sentence": "pull up peking garden online",
+  "gold": {
+   "food_type": [],
+   "business_name": [
+    "peking garden"
+   ],
+   "order_type": []
+  },
+  "recordings": {
+   "headset": "audio-1501767333-headset.flac",
+   "distant": "audio-1501767333.flac"
+  }
+ },
+ {
+  "slurp_id": 2255,
+  "split": "test",
+  "sentence": "can i order take out from licari's",
+  "gold": {
+   "food_type": [],
+   "business_name": [
+    "licari 's"
+   ],
+   "order_type": [
+    "take out"
+   ]
+  },
+  "recordings": {
+   "headset": "audio-1490263076-headset.flac",
+   "distant": "audio-1490263076.flac"
+  }
+ },
+ {
+  "slurp_id": 2267,
+  "split": "train",
+  "sentence": "order the usual from turiellos pizza",
+  "gold": {
+   "food_type": [],
+   "business_name": [
+    "turiellos pizza"
+   ],
+   "order_type": []
+  },
+  "recordings": {
+   "headset": "audio-1490198641-headset.flac",
+   "distant": "audio-1502216624.flac"
+  }
+ },
+ {
+  "slurp_id": 2268,
+  "split": "train",
+  "sentence": "order the best priced general tofu in nyack",
+  "gold": {
+   "food_type": [
+    "tofu"
+   ],
+   "business_name": [
+    "nyack"
+   ],
+   "order_type": []
+  },
+  "recordings": {
+   "headset": "audio-1490195358-headset.flac",
+   "distant": "audio-1490195358.flac"
+  }
+ },
+ {
+  "slurp_id": 2336,
+  "split": "test",
+  "sentence": "noodles one pack make it as takeaway",
+  "gold": {
+   "food_type": [
+    "noodles"
+   ],
+   "business_name": [],
+   "order_type": [
+    "takeaway"
+   ]
+  },
+  "recordings": {
+   "headset": "audio-1501692178-headset.flac",
+   "distant": "audio-1501692178.flac"
+  }
+ },
+ {
+  "slurp_id": 2338,
+  "split": "test",
+  "sentence": "make an order for noodles one pack make it as takeaway order",
+  "gold": {
+   "food_type": [
+    "noodles"
+   ],
+   "business_name": [],
+   "order_type": [
+    "takeaway"
+   ]
+  },
+  "recordings": {
+   "headset": "audio-1502100458-headset.flac",
+   "distant": "audio-1488969772.flac"
+  }
+ },
+ {
+  "slurp_id": 2361,
+  "split": "train",
+  "sentence": "i want to order some pizza",
+  "gold": {
+   "food_type": [
+    "pizza"
+   ],
+   "business_name": [],
+   "order_type": []
+  },
+  "recordings": {
+   "headset": "audio-1490801261-headset.flac",
+   "distant": "audio-1490801261.flac"
+  }
+ },
+ {
+  "slurp_id": 2362,
+  "split": "train",
+  "sentence": "find me the nearest chinese for delivery",
+  "gold": {
+   "food_type": [
+    "chinese"
+   ],
+   "business_name": [],
+   "order_type": [
+    "delivery"
+   ]
+  },
+  "recordings": {
+   "headset": "audio-1502896656-headset.flac",
+   "distant": "audio-1502896656.flac"
+  }
+ },
+ {
+  "slurp_id": 2415,
+  "split": "train",
+  "sentence": "call china king chinese restaurant",
+  "gold": {
+   "food_type": [
+    "chinese"
+   ],
+   "business_name": [
+    "china king"
+   ],
+   "order_type": []
+  },
+  "recordings": {
+   "headset": "audio-1490286430-headset.flac",
+   "distant": "audio-1501697560.flac"
+  }
+ },
+ {
+  "slurp_id": 2448,
+  "split": "train",
+  "sentence": "place order for a chicken manchow soup from wangs kitchen restaurant",
+  "gold": {
+   "food_type": [
+    "chicken manchow soup"
+   ],
+   "business_name": [
+    "wangs kitchen"
+   ],
+   "order_type": []
+  },
+  "recordings": {
+   "headset": "audio-1489672343-headset.flac",
+   "distant": "audio-1489672343.flac"
+  }
+ },
+ {
+  "slurp_id": 2449,
+  "split": "train",
+  "sentence": "from wangs kitchen restaurant home delivery for a chicken manchow soup",
+  "gold": {
+   "food_type": [
+    "chicken manchow soup"
+   ],
+   "business_name": [
+    "wangs kitchen"
+   ],
+   "order_type": [
+    "delivery"
+   ]
+  },
+  "recordings": {
+   "headset": "audio-1502198778-headset.flac",
+   "distant": "audio-1488982703.flac"
+  }
+ },
+ {
+  "slurp_id": 2478,
+  "split": "devel",
+  "sentence": "order takeout",
+  "gold": {
+   "food_type": [],
+   "business_name": [],
+   "order_type": [
+    "takeout"
+   ]
+  },
+  "recordings": {
+   "headset": "audio-1499088591-headset.flac",
+   "distant": "audio-1499088591.flac"
+  }
+ },
+ {
+  "slurp_id": 2479,
+  "split": "train",
+  "sentence": "open takeout menus",
+  "gold": {
+   "food_type": [],
+   "business_name": [],
+   "order_type": [
+    "takeout"
+   ]
+  },
+  "recordings": {
+   "headset": "audio-1502376611-headset.flac",
+   "distant": "audio-1502376611.flac"
+  }
+ },
+ {
+  "slurp_id": 2480,
+  "split": "test",
+  "sentence": "call for takeout",
+  "gold": {
+   "food_type": [],
+   "business_name": [],
+   "order_type": [
+    "takeout"
+   ]
+  },
+  "recordings": {
+   "headset": "audio-1490104507-headset.flac",
+   "distant": "audio-1490104507.flac"
+  }
+ },
+ {
+  "slurp_id": 2629,
+  "split": "train",
+  "sentence": "order mcdonalds",
+  "gold": {
+   "food_type": [],
+   "business_name": [
+    "mcdonalds"
+   ],
+   "order_type": []
+  },
+  "recordings": {
+   "headset": "audio-1490960601-headset.flac",
+   "distant": "audio-1498576230.flac"
+  }
+ },
+ {
+  "slurp_id": 2630,
+  "split": "train",
+  "sentence": "order chinese food",
+  "gold": {
+   "food_type": [
+    "chinese"
+   ],
+   "business_name": [],
+   "order_type": []
+  },
+  "recordings": {
+   "headset": "audio-1497263047-headset.flac",
+   "distant": "audio-1497881826.flac"
+  }
+ },
+ {
+  "slurp_id": 2631,
+  "split": "train",
+  "sentence": "show me nearby takeout restaurants",
+  "gold": {
+   "food_type": [],
+   "business_name": [],
+   "order_type": [
+    "takeout"
+   ]
+  },
+  "recordings": {
+   "headset": "audio-1490110028-headset.flac",
+   "distant": "audio-1490110028.flac"
+  }
+ },
+ {
+  "slurp_id": 2696,
+  "split": "train",
+  "sentence": "order chinese from china spring wonton soup and a small beef and broccoli",
+  "gold": {
+   "food_type": [
+    "chinese",
+    "beef and broccoli"
+   ],
+   "business_name": [
+    "china spring wonton soup"
+   ],
+   "order_type": []
+  },
+  "recordings": {
+   "headset": "audio-1501758623-headset.flac",
+   "distant": "audio-1501758623.flac"
+  }
+ },
+ {
+  "slurp_id": 2697,
+  "split": "train",
+  "sentence": "order two medium cheese and one medium pepperoni pizza from dominoes",
+  "gold": {
+   "food_type": [
+    "cheese",
+    "pepperoni pizza"
+   ],
+   "business_name": [
+    "dominoes"
+   ],
+   "order_type": []
+  },
+  "recordings": {
+   "headset": "audio--1505324691-headset.flac",
+   "distant": "audio-1501756377.flac"
+  }
+ },
+ {
+  "slurp_id": 2764,
+  "split": "train",
+  "sentence": "i would like to order takeaway",
+  "gold": {
+   "food_type": [],
+   "business_name": [],
+   "order_type": [
+    "takeaway"
+   ]
+  },
+  "recordings": {
+   "headset": "audio-1497437478-headset.flac",
+   "distant": "audio-1499694008.flac"
+  }
+ },
+ {
+  "slurp_id": 2765,
+  "split": "train",
+  "sentence": "i'm in the mood to order takeaway",
+  "gold": {
+   "food_type": [],
+   "business_name": [],
+   "order_type": [
+    "takeaway"
+   ]
+  },
+  "recordings": {
+   "headset": "audio-1501768558-headset.flac",
+   "distant": "audio-1488993777.flac"
+  }
+ },
+ {
+  "slurp_id": 2766,
+  "split": "train",
+  "sentence": "start a takeaway order for me",
+  "gold": {
+   "food_type": [],
+   "business_name": [],
+   "order_type": [
+    "takeaway"
+   ]
+  },
+  "recordings": {
+   "headset": "audio-1490193915-headset.flac",
+   "distant": "audio-1490193915.flac"
+  }
+ },
+ {
+  "slurp_id": 2899,
+  "split": "train",
+  "sentence": "order pizza",
+  "gold": {
+   "food_type": [
+    "pizza"
+   ],
+   "business_name": [],
+   "order_type": []
+  },
+  "recordings": {
+   "headset": "audio-1490009063-headset.flac",
+   "distant": "audio-1490009063.flac"
+  }
+ },
+ {
+  "slurp_id": 2900,
+  "split": "train",
+  "sentence": "get large pizza with pepperoni",
+  "gold": {
+   "food_type": [
+    "pizza with pepperoni"
+   ],
+   "business_name": [],
+   "order_type": []
+  },
+  "recordings": {
+   "headset": "audio-1490109171-headset.flac",
+   "distant": "audio-1490109171.flac"
+  }
+ },
+ {
+  "slurp_id": 2901,
+  "split": "devel",
+  "sentence": "order general t'so eggroll to go",
+  "gold": {
+   "food_type": [
+    "t'so eggroll"
+   ],
+   "business_name": [],
+   "order_type": []
+  },
+  "recordings": {
+   "headset": "audio-1497887141-headset.flac",
+   "distant": "audio-1498578723.flac"
+  }
+ },
+ {
+  "slurp_id": 2923,
+  "split": "train",
+  "sentence": "hey order me some take out from jason's deli",
+  "gold": {
+   "food_type": [],
+   "business_name": [
+    "jason 's deli"
+   ],
+   "order_type": []
+  },
+  "recordings": {
+   "headset": "audio-1490960934-headset.flac",
+   "distant": "audio-1490960934.flac"
+  }
+ },
+ {
+  "slurp_id": 2925,
+  "split": "train",
+  "sentence": "please order take from jason's deli",
+  "gold": {
+   "food_type": [],
+   "business_name": [
+    "jason 's deli"
+   ],
+   "order_type": []
+  },
+  "recordings": {
+   "headset": "audio-1490368947-headset.flac",
+   "distant": "audio-1501151277.flac"
+  }
+ },
+ {
+  "slurp_id": 2926,
+  "split": "train",
+  "sentence": "yo order take out from jason's deli on sixth ave",
+  "gold": {
+   "food_type": [],
+   "business_name": [
+    "jason 's deli",
+    "sixth ave"
+   ],
+   "order_type": []
+  },
+  "recordings": {
+   "headset": "audio-1489498072-headset.flac",
+   "distant": "audio-1488975830.flac"
+  }
+ },
+ {
+  "slurp_id": 3046,
+  "split": "devel",
+  "sentence": "i am really craving for chinese food right now please let me order take out",
+  "gold": {
+   "food_type": [
+    "chinese"
+   ],
+   "business_name": [],
+   "order_type": []
+  },
+  "recordings": {
+   "headset": "audio-1498566331-headset.flac",
+   "distant": "audio-1498566331.flac"
+  }
+ },
+ {
+  "slurp_id": 3047,
+  "split": "train",
+  "sentence": "can you please order me some mcdonalds",
+  "gold": {
+   "food_type": [],
+   "business_name": [
+    "mcdonalds"
+   ],
+   "order_type": []
+  },
+  "recordings": {
+   "headset": "audio-1494513307-headset.flac",
+   "distant": "audio-1494513307.flac"
+  }
+ },
+ {
+  "slurp_id": 3048,
+  "split": "train",
+  "sentence": "how about some pizza tonight olly can you please order a pepperoni large",
+  "gold": {
+   "food_type": [],
+   "business_name": [
+    "carmike cinemas"
+   ],
+   "order_type": []
+  },
+  "recordings": {
+   "headset": "audio-1490194174-headset.flac",
+   "distant": "audio-1490194174.flac"
+  }
+ },
+ {
+  "slurp_id": 3049,
+  "split": "train",
+  "sentence": "how about some pizza tonight can you please order a pepperoni large",
+  "gold": {
+   "food_type": [
+    "pizza",
+    "pepperoni large"
+   ],
+   "business_name": [],
+   "order_type": []
+  },
+  "recordings": {
+   "headset": "audio-1502099741-headset.flac",
+   "distant": "audio-1502099741.flac"
+  }
+ },
+ {
+  "slurp_id": 3066,
+  "split": "train",
+  "sentence": "order me some chipotle",
+  "gold": {
+   "food_type": [],
+   "business_name": [
+    "chipotle"
+   ],
+   "order_type": []
+  },
+  "recordings": {
+   "headset": "audio-1501692427-headset.flac",
+   "distant": "audio-1501692427.flac"
+  }
+ },
+ {
+  "slurp_id": 3068,
+  "split": "train",
+  "sentence": "order me postmates of mcdonald",
+  "gold": {
+   "food_type": [
+    "postmates"
+   ],
+   "business_name": [
+    "mcdonald"
+   ],
+   "order_type": []
+  },
+  "recordings": {
+   "headset": "audio-1497887607-headset.flac",
+   "distant": "audio-1490199024.flac"
+  }
+ },
+ {
+  "slurp_id": 3069,
+  "split": "train",
+  "sentence": "order me some chinese food",
+  "gold": {
+   "food_type": [
+    "chinese"
+   ],
+   "business_name": [],
+   "order_type": []
+  },
+  "recordings": {
+   "headset": "audio-1497558088-headset.flac",
+   "distant": "audio-1497558088.flac"
+  }
+ }
+]

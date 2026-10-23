@@ -1,0 +1,62 @@
+{
+  "entities": {
+    "line_1": {
+      "fields": {
+        "item": {
+          "confidence": 1.0,
+          "event_id": "e_007",
+          "evidence": {
+            "end_sec": 8.8,
+            "min_word_confidence": 1.0,
+            "quote": "veggie burger.",
+            "start_sec": 8.0,
+            "utterance_id": "u_002",
+            "word_span": [
+              5,
+              6
+            ]
+          },
+          "field_id": "line_1.item",
+          "history": [
+            {
+              "event_id": "e_003",
+              "status": "superseded",
+              "value": "hamburger"
+            }
+          ],
+          "status": "confirmed",
+          "value": "veggie burger"
+        }
+      },
+      "removed": false
+    },
+    "line_2": {
+      "fields": {
+        "item": {
+          "confidence": 0.9995,
+          "event_id": "e_004",
+          "evidence": {
+            "end_sec": 2.24,
+            "min_word_confidence": 0.9995,
+            "quote": "onion rings,",
+            "start_sec": 1.6800000000000002,
+            "utterance_id": "u_001",
+            "word_span": [
+              3,
+              4
+            ]
+          },
+          "field_id": "line_2.item",
+          "history": [],
+          "status": "confirmed",
+          "value": "onion rings"
+        }
+      },
+      "removed": false
+    }
+  },
+  "finalized": true,
+  "open_question": null,
+  "pending_targets": {},
+  "questions_asked": 0
+}

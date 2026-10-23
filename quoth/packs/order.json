@@ -1,0 +1,57 @@
+{
+  "name": "order",
+  "description": "Drive-thru style food order. Each entity is one order line.",
+  "entity_prefix": "line",
+  "label_field": "item",
+  "fields": {
+    "item": {
+      "type": "string",
+      "criticality": "critical",
+      "allowed_values": [
+        "cheeseburger",
+        "hamburger",
+        "chicken sandwich",
+        "veggie burger",
+        "fries",
+        "onion rings",
+        "side salad",
+        "vanilla shake",
+        "chocolate shake",
+        "strawberry shake",
+        "cola",
+        "lemonade",
+        "iced tea",
+        "water"
+      ]
+    },
+    "quantity": {
+      "type": "integer",
+      "criticality": "critical",
+      "default": 1,
+      "min": 1,
+      "max": 20
+    },
+    "modifiers": {
+      "type": "list",
+      "criticality": "normal",
+      "allowed_values": [
+        "no onions",
+        "no pickles",
+        "no tomato",
+        "no lettuce",
+        "extra cheese",
+        "extra pickles",
+        "add bacon",
+        "no ice",
+        "large",
+        "small"
+      ]
+    }
+  },
+  "thresholds": {
+    "critical": 0.8,
+    "normal": 0.65
+  },
+  "max_questions": 3,
+  "finalization_triggers": ["that's all", "that is all", "that's it", "that will be all", "i'm done"]
+}

@@ -1,0 +1,117 @@
+[
+  {
+    "id": "s01-plain",
+    "tests": "baseline: clean order, should ask nothing",
+    "say": ["Hi, can I get two cheeseburgers and a cola.", "That's all."],
+    "expected": [
+      {"item": "cheeseburger", "quantity": 2, "modifiers": []},
+      {"item": "cola", "quantity": 1, "modifiers": []}
+    ]
+  },
+  {
+    "id": "s02-self-correct-same-turn",
+    "tests": "correcting a number mid-sentence",
+    "say": ["Can I get two, uh, actually three chicken sandwiches and a lemonade.", "That's all."],
+    "expected": [
+      {"item": "chicken sandwich", "quantity": 3, "modifiers": []},
+      {"item": "lemonade", "quantity": 1, "modifiers": []}
+    ]
+  },
+  {
+    "id": "s03-change-item-later",
+    "tests": "swapping an item in a later turn",
+    "say": ["A hamburger and onion rings, please.", "Actually, make the hamburger a veggie burger.", "That's all."],
+    "expected": [
+      {"item": "veggie burger", "quantity": 1, "modifiers": []},
+      {"item": "onion rings", "quantity": 1, "modifiers": []}
+    ]
+  },
+  {
+    "id": "s04-change-quantity-later",
+    "tests": "fixing a quantity in a later turn",
+    "say": ["Four iced teas and fries.", "Sorry, I meant two iced teas, not four.", "That's all."],
+    "expected": [
+      {"item": "iced tea", "quantity": 2, "modifiers": []},
+      {"item": "fries", "quantity": 1, "modifiers": []}
+    ]
+  },
+  {
+    "id": "s05-ambiguous-correction",
+    "tests": "a correction that could mean either item; the agent should ask which",
+    "say": ["A cheeseburger and a chocolate shake.", "Make that two.", "(when asked which one) The shake.", "That's all."],
+    "expected": [
+      {"item": "cheeseburger", "quantity": 1, "modifiers": []},
+      {"item": "chocolate shake", "quantity": 2, "modifiers": []}
+    ]
+  },
+  {
+    "id": "s06-remove-item",
+    "tests": "removing an item",
+    "say": ["Fries, onion rings, and a side salad.", "Actually, scratch the onion rings.", "That's all."],
+    "expected": [
+      {"item": "fries", "quantity": 1, "modifiers": []},
+      {"item": "side salad", "quantity": 1, "modifiers": []}
+    ]
+  },
+  {
+    "id": "s07-change-modifiers",
+    "tests": "taking back one modifier and keeping another",
+    "say": ["A cheeseburger with no pickles and no onions.", "Oh wait, I do want pickles. Just no onions.", "That's all."],
+    "expected": [
+      {"item": "cheeseburger", "quantity": 1, "modifiers": ["no onions"]}
+    ]
+  },
+  {
+    "id": "s08-false-start",
+    "tests": "fillers and a wrong word replaced mid-sentence",
+    "say": ["Um, can I get a, uh, vanilla, no, strawberry shake and, uh, a water.", "That's all."],
+    "expected": [
+      {"item": "strawberry shake", "quantity": 1, "modifiers": []},
+      {"item": "water", "quantity": 1, "modifiers": []}
+    ]
+  },
+  {
+    "id": "s09-stumble-with-modifiers",
+    "tests": "a cut-off word and several modifiers in one breath",
+    "say": ["I'll have a chick-, a chicken sandwich with extra cheese and add bacon, and a large fries.", "That's all."],
+    "expected": [
+      {"item": "chicken sandwich", "quantity": 1, "modifiers": ["extra cheese", "add bacon"]},
+      {"item": "fries", "quantity": 1, "modifiers": ["large"]}
+    ]
+  },
+  {
+    "id": "s10-off-menu",
+    "tests": "an item not on the menu, then replacing it",
+    "say": ["Can I get a pepperoni pizza?", "(if asked, or next) Never mind the pizza. Just a hamburger and a cola.", "That's all."],
+    "expected": [
+      {"item": "hamburger", "quantity": 1, "modifiers": []},
+      {"item": "cola", "quantity": 1, "modifiers": []}
+    ]
+  },
+  {
+    "id": "s11-fix-size",
+    "tests": "correcting a size you said wrong",
+    "say": ["One small lemonade and a veggie burger with no tomato.", "Wait, I said small? I want a large lemonade.", "That's all."],
+    "expected": [
+      {"item": "lemonade", "quantity": 1, "modifiers": ["large"]},
+      {"item": "veggie burger", "quantity": 1, "modifiers": ["no tomato"]}
+    ]
+  },
+  {
+    "id": "s12-many-changes",
+    "tests": "a longer order with several separate changes",
+    "say": [
+      "Can I get three hamburgers, two fries, and three colas.",
+      "Make the colas lemonades.",
+      "And actually only two hamburgers.",
+      "Add an iced tea, no ice.",
+      "That's all."
+    ],
+    "expected": [
+      {"item": "hamburger", "quantity": 2, "modifiers": []},
+      {"item": "fries", "quantity": 2, "modifiers": []},
+      {"item": "lemonade", "quantity": 3, "modifiers": []},
+      {"item": "iced tea", "quantity": 1, "modifiers": ["no ice"]}
+    ]
+  }
+]

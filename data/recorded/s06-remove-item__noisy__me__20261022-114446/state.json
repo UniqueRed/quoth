@@ -1,0 +1,80 @@
+{
+  "entities": {
+    "line_1": {
+      "fields": {
+        "item": {
+          "confidence": 0.999,
+          "event_id": "e_003",
+          "evidence": {
+            "end_sec": 1.28,
+            "min_word_confidence": 0.999,
+            "quote": "fries,",
+            "start_sec": 0.64,
+            "utterance_id": "u_001",
+            "word_span": [
+              0,
+              0
+            ]
+          },
+          "field_id": "line_1.item",
+          "history": [],
+          "status": "confirmed",
+          "value": "fries"
+        }
+      },
+      "removed": false
+    },
+    "line_2": {
+      "fields": {
+        "item": {
+          "confidence": 0.9868,
+          "event_id": "e_004",
+          "evidence": {
+            "end_sec": 2.0,
+            "min_word_confidence": 0.9868,
+            "quote": "onion rings,",
+            "start_sec": 1.28,
+            "utterance_id": "u_001",
+            "word_span": [
+              1,
+              2
+            ]
+          },
+          "field_id": "line_2.item",
+          "history": [],
+          "status": "confirmed",
+          "value": "onion rings"
+        }
+      },
+      "removed": true
+    },
+    "line_3": {
+      "fields": {
+        "item": {
+          "confidence": 0.9883,
+          "event_id": "e_005",
+          "evidence": {
+            "end_sec": 2.8,
+            "min_word_confidence": 0.9883,
+            "quote": "side salad.",
+            "start_sec": 2.24,
+            "utterance_id": "u_001",
+            "word_span": [
+              5,
+              6
+            ]
+          },
+          "field_id": "line_3.item",
+          "history": [],
+          "status": "confirmed",
+          "value": "side salad"
+        }
+      },
+      "removed": false
+    }
+  },
+  "finalized": true,
+  "open_question": null,
+  "pending_targets": {},
+  "questions_asked": 1
+}

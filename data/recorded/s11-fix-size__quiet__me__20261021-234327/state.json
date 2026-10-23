@@ -1,0 +1,106 @@
+{
+  "entities": {
+    "line_1": {
+      "fields": {
+        "item": {
+          "confidence": 0.9985,
+          "event_id": "e_003",
+          "evidence": {
+            "end_sec": 2.0,
+            "min_word_confidence": 0.9985,
+            "quote": "lemonade",
+            "start_sec": 1.6800000000000002,
+            "utterance_id": "u_001",
+            "word_span": [
+              2,
+              2
+            ]
+          },
+          "field_id": "line_1.item",
+          "history": [],
+          "status": "confirmed",
+          "value": "lemonade"
+        },
+        "modifiers": {
+          "confidence": 1.0,
+          "event_id": "e_009",
+          "evidence": {
+            "end_sec": 12.64,
+            "min_word_confidence": 1.0,
+            "quote": "large",
+            "start_sec": 12.4,
+            "utterance_id": "u_002",
+            "word_span": [
+              7,
+              7
+            ]
+          },
+          "field_id": "line_1.modifiers",
+          "history": [
+            {
+              "event_id": "e_004",
+              "status": "superseded",
+              "value": [
+                "small"
+              ]
+            }
+          ],
+          "status": "confirmed",
+          "value": [
+            "large"
+          ]
+        }
+      },
+      "removed": false
+    },
+    "line_2": {
+      "fields": {
+        "item": {
+          "confidence": 1.0,
+          "event_id": "e_005",
+          "evidence": {
+            "end_sec": 2.88,
+            "min_word_confidence": 1.0,
+            "quote": "veggie burger",
+            "start_sec": 2.4,
+            "utterance_id": "u_001",
+            "word_span": [
+              5,
+              6
+            ]
+          },
+          "field_id": "line_2.item",
+          "history": [],
+          "status": "confirmed",
+          "value": "veggie burger"
+        },
+        "modifiers": {
+          "confidence": 1.0,
+          "event_id": "e_006",
+          "evidence": {
+            "end_sec": 4.16,
+            "min_word_confidence": 1.0,
+            "quote": "no tomato.",
+            "start_sec": 3.2,
+            "utterance_id": "u_001",
+            "word_span": [
+              8,
+              9
+            ]
+          },
+          "field_id": "line_2.modifiers",
+          "history": [],
+          "status": "confirmed",
+          "value": [
+            "no tomato"
+          ]
+        }
+      },
+      "removed": false
+    }
+  },
+  "finalized": true,
+  "open_question": null,
+  "pending_targets": {},
+  "questions_asked": 0
+}

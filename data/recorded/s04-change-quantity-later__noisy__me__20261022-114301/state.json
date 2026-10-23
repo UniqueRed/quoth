@@ -1,0 +1,81 @@
+{
+  "entities": {
+    "line_1": {
+      "fields": {
+        "item": {
+          "confidence": 0.5303,
+          "event_id": "e_003",
+          "evidence": {
+            "end_sec": 2.24,
+            "min_word_confidence": 0.5303,
+            "quote": "iced teas",
+            "start_sec": 1.6800000000000002,
+            "utterance_id": "u_001",
+            "word_span": [
+              1,
+              2
+            ]
+          },
+          "field_id": "line_1.item",
+          "history": [],
+          "status": "confirmed",
+          "value": "iced tea"
+        },
+        "quantity": {
+          "confidence": 0.9902,
+          "event_id": "e_013",
+          "evidence": {
+            "end_sec": 13.28,
+            "min_word_confidence": 0.9902,
+            "quote": "two",
+            "start_sec": 13.2,
+            "utterance_id": "u_003",
+            "word_span": [
+              4,
+              4
+            ]
+          },
+          "field_id": "line_1.quantity",
+          "history": [
+            {
+              "event_id": "e_004",
+              "status": "superseded",
+              "value": 4
+            }
+          ],
+          "status": "confirmed",
+          "value": 2
+        }
+      },
+      "removed": false
+    },
+    "line_2": {
+      "fields": {
+        "item": {
+          "confidence": 1.0,
+          "event_id": "e_005",
+          "evidence": {
+            "end_sec": 3.2800000000000002,
+            "min_word_confidence": 1.0,
+            "quote": "fries.",
+            "start_sec": 2.56,
+            "utterance_id": "u_001",
+            "word_span": [
+              4,
+              4
+            ]
+          },
+          "field_id": "line_2.item",
+          "history": [],
+          "status": "confirmed",
+          "value": "fries"
+        }
+      },
+      "removed": false
+    }
+  },
+  "finalized": true,
+  "open_question": null,
+  "pending_targets": {},
+  "questions_asked": 1
+}

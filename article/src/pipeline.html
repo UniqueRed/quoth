@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Pipeline</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  html, body { margin: 0; width: 1200px; height: 664px; overflow: hidden; background: #fff; }
+  body { font-family: Inter, -apple-system, sans-serif; color: #15161c; padding: 44px 48px; box-sizing: border-box; }
+  h1 { font-size: 26px; margin: 0; letter-spacing: -.01em; }
+  .sub { color: #52514e; font-size: 16px; margin: 6px 0 34px; }
+  .flow { display: grid; grid-template-columns: repeat(5, 1fr); gap: 28px; position: relative; }
+  .step { position: relative; border: 1px solid #e7e8ed; border-radius: 16px; padding: 18px 16px 16px; background: #fff; box-shadow: 0 1px 2px rgba(16,24,40,.04), 0 8px 24px rgba(16,24,40,.05); }
+  .step:not(:last-child)::after { content: ""; position: absolute; right: -24px; top: 50%; width: 20px; height: 2px; background: #9a9daa; }
+  .step:not(:last-child)::before { content: ""; position: absolute; right: -25px; top: calc(50% - 5px); border: 6px solid transparent; border-left-color: #9a9daa; border-right: 0; }
+  .n { font-size: 12px; font-weight: 700; color: #5b5cf0; letter-spacing: .08em; text-transform: uppercase; }
+  .step h2 { font-size: 17px; margin: 6px 0 8px; }
+  .step p { margin: 0; font-size: 13.5px; line-height: 1.45; color: #52514e; }
+  .step.llm { background: #fbfaff; border-color: #d9dbfd; }
+  .tag { display: inline-block; margin-top: 10px; font-size: 11.5px; font-weight: 600; padding: 2px 8px; border-radius: 99px; background: #eef0ff; color: #3f40c9; }
+  .tag.det { background: #e9f8ef; color: #15803d; }
+  .outcomes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 30px 0 0 auto; width: 62%; }
+  .o { border-radius: 12px; padding: 10px 12px; font-size: 13px; border: 1px solid; }
+  .o b { display: block; font-size: 13.5px; }
+  .ok { background: #e9f8ef; border-color: #c6ecd4; } .ok b { color: #15803d; }
+  .ask { background: #fff6e5; border-color: #fbe1ae; } .ask b { color: #b45309; }
+  .rej { background: #fdecec; border-color: #f8cccc; } .rej b { color: #c81e1e; }
+  .log { margin-top: 34px; border: 1.5px dashed #c9cad6; border-radius: 16px; padding: 18px 20px; background: #fafafb; }
+  .log h3 { margin: 0 0 10px; font-size: 15px; }
+  .log h3 span { font-weight: 500; color: #52514e; }
+  .events { display: flex; flex-wrap: wrap; gap: 8px; }
+  .ev { font: 500 12.5px ui-monospace, SFMono-Regular, Menlo, monospace; padding: 4px 10px; border-radius: 8px; background: #fff; border: 1px solid #e7e8ed; }
+  .note { margin-top: 12px; font-size: 13px; color: #52514e; }
+</style>
+</head>
+<body>
+<h1>How Quoth turns speech into state</h1>
+<div class="sub">The LLM only proposes. Deterministic code decides, and every step is written to an append-only log.</div>
+
+<div class="flow">
+  <div class="step"><div class="n">1 · Hear</div><h2>Deepgram Flux</h2><p>Streaming speech-to-text. Emits a turn when the speaker finishes, with every word's timestamp and confidence.</p></div>
+  <div class="step llm"><div class="n">2 · Interpret</div><h2>Claude</h2><p>Proposes operations (add, update, remove, confirm, deny). Each one cites the exact <b>word span</b> it came from, or marks the turn <b>unclear</b>.</p><span class="tag">proposes only</span></div>
+  <div class="step"><div class="n">3 · Verify</div><h2>Verifier</h2><p>Does the quote match those words? Is the number spoken? Is the value on the menu? Is there exactly one target?</p><span class="tag det">deterministic</span></div>
+  <div class="step"><div class="n">4 · Gate</div><h2>Confidence gate</h2><p>Field confidence = lowest word confidence in the cited span. Critical fields need 0.80, normal fields 0.65.</p><span class="tag det">deterministic</span></div>
+  <div class="step"><div class="n">5 · Ask</div><h2>Clarify</h2><p>Templated questions about the riskiest open item, within a budget of 3. The rest is read back at the end.</p><span class="tag det">deterministic</span></div>
+</div>
+
+<div class="outcomes">
+  <div class="o ok"><b>Applied</b>committed to the order</div>
+  <div class="o ask"><b>Downgraded</b>pending → the agent asks</div>
+  <div class="o rej"><b>Rejected</b>failed verification, logged</div>
+</div>
+
+<div class="log">
+  <h3>events.jsonl <span>· append-only · state = reduce(events) · replayable byte for byte</span></h3>
+  <div class="events">
+    <span class="ev">utterance_finalized</span><span class="ev">ops_proposed</span><span class="ev">op_applied</span><span class="ev">op_downgraded</span>
+    <span class="ev">op_rejected</span><span class="ev">clarification_asked</span><span class="ev">clarification_answered</span><span class="ev">session_finalized</span>
+  </div>
+  <div class="note">Swap the model or the prompt, replay the stored turns, and diff the resulting state field by field.</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Noisy conversation</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  html, body { margin: 0; width: 1100px; height: 900px; overflow: hidden; background: #fff; }
+  body { font-family: Inter, -apple-system, sans-serif; color: #15161c; padding: 40px 48px; box-sizing: border-box; }
+  h1 { font-size: 25px; margin: 0; letter-spacing: -.01em; }
+  .sub { color: #52514e; font-size: 15.5px; margin: 6px 0 26px; }
+  .turn { display: grid; grid-template-columns: 300px 1fr; gap: 22px; padding: 14px 0; border-top: 1px solid #eeeef2; align-items: start; }
+  .said { font-size: 14px; color: #8a8984; padding-top: 10px; }
+  .said b { display: block; color: #52514e; font-weight: 600; font-size: 11.5px; text-transform: uppercase; letter-spacing: .06em; margin-bottom: 2px; }
+  .bubble { display: inline-block; padding: 10px 14px; border-radius: 14px; font-size: 16px; max-width: 640px; }
+  .heard { background: #eef0ff; border-bottom-left-radius: 5px; }
+  .heard .who, .agent .who { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; opacity: .55; margin-bottom: 2px; }
+  .agent { background: #fff6e5; border: 1px solid #fbe1ae; margin-top: 8px; border-bottom-left-radius: 5px; }
+  .agent.final { background: #e9f8ef; border-color: #c6ecd4; }
+  .agent.none { background: #fdecec; border-color: #f8cccc; }
+  .bad { background: #ffe1d2; border-bottom: 2px solid #eb6834; padding: 0 3px; border-radius: 4px; }
+  .conf { font: 600 11.5px ui-monospace, Menlo, monospace; color: #c2410c; vertical-align: 6px; margin-left: 3px; }
+  .conf.hi { color: #c81e1e; }
+  .why { font-size: 12.5px; color: #6b6f7c; margin-top: 6px; font-style: italic; }
+</style>
+</head>
+<body>
+<h1>Café noise, one order, four tries</h1>
+<div class="sub">From a real recorded session. The small numbers are Deepgram's word confidence for the misheard words.</div>
+
+<div class="turn">
+  <div class="said"><b>Said</b>Can I get three hamburgers, two fries, and three colas.</div>
+  <div>
+    <div class="bubble heard"><div class="who">Agent heard</div>Can I get three <span class="bad">handovers</span><span class="conf hi">1.00</span>, two fries, and three <span class="bad">collars</span><span class="conf hi">1.00</span>?</div>
+    <div class="why">Claude: “handovers” and “collars” aren't on the menu → marks the turn unclear</div>
+    <br><div class="bubble agent"><div class="who">Agent</div>Sorry, I didn't catch that. Could you say it again?</div>
+  </div>
+</div>
+<div class="turn">
+  <div class="said"><b>Said</b>(the same again)</div>
+  <div>
+    <div class="bubble heard"><div class="who">Agent heard</div>Can I get three hamburgers, two fries, and three <span class="bad">polos</span><span class="conf hi">1.00</span>?</div>
+    <br><div class="bubble agent"><div class="who">Agent</div>Sorry, I didn't catch that. Could you say it again?</div>
+  </div>
+</div>
+<div class="turn">
+  <div class="said"><b>Said</b>(the same again)</div>
+  <div>
+    <div class="bubble heard"><div class="who">Agent heard</div>I want three hamburgers, two fries, and three <span class="bad">whole</span><span class="conf">0.18</span> ones.</div>
+    <br><div class="bubble agent"><div class="who">Agent</div>Sorry, I didn't catch that. Could you say it again?</div>
+  </div>
+</div>
+<div class="turn">
+  <div class="said"><b>Said</b>(the same again)</div>
+  <div>
+    <div class="bubble heard"><div class="who">Agent heard</div>Three hamburgers, two fries, and three colas.</div>
+    <div class="why">All three items committed. The question budget (3) is now spent.</div>
+  </div>
+</div>
+<div class="turn">
+  <div class="said"><b>Said</b>Actually, make the colas lemonades.</div>
+  <div>
+    <div class="bubble heard"><div class="who">Agent heard</div>Actually, make the <span class="bad">provolone</span><span class="conf">0.37</span> lemonade.</div>
+    <br><div class="bubble agent none"><div class="who">Agent</div>(no questions left, so this change was lost; the fix now reads it back at the end)</div>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,75 @@
+{
+  "entities": {
+    "line_1": {
+      "fields": {
+        "item": {
+          "confidence": 1.0,
+          "event_id": "e_003",
+          "evidence": {
+            "end_sec": 2.16,
+            "min_word_confidence": 1.0,
+            "quote": "cheeseburgers",
+            "start_sec": 1.52,
+            "utterance_id": "u_001",
+            "word_span": [
+              5,
+              5
+            ]
+          },
+          "field_id": "line_1.item",
+          "history": [],
+          "status": "confirmed",
+          "value": "cheeseburger"
+        },
+        "quantity": {
+          "confidence": 0.9844,
+          "event_id": "e_004",
+          "evidence": {
+            "end_sec": 1.52,
+            "min_word_confidence": 0.9844,
+            "quote": "two",
+            "start_sec": 1.28,
+            "utterance_id": "u_001",
+            "word_span": [
+              4,
+              4
+            ]
+          },
+          "field_id": "line_1.quantity",
+          "history": [],
+          "status": "confirmed",
+          "value": 2
+        }
+      },
+      "removed": false
+    },
+    "line_2": {
+      "fields": {
+        "item": {
+          "confidence": 0.6294,
+          "event_id": "e_008",
+          "evidence": {
+            "end_sec": 16.08,
+            "min_word_confidence": 0.6294,
+            "quote": "cola",
+            "start_sec": 15.6,
+            "utterance_id": "u_002",
+            "word_span": [
+              8,
+              8
+            ]
+          },
+          "field_id": "line_2.item",
+          "history": [],
+          "status": "confirmed",
+          "value": "cola"
+        }
+      },
+      "removed": false
+    }
+  },
+  "finalized": true,
+  "open_question": null,
+  "pending_targets": {},
+  "questions_asked": 3
+}
