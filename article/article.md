@@ -2,7 +2,7 @@
 
 ## What I learned building a voice agent that knows what it heard, and asks only when it should
 
-![Cover: a voice agent asking which item the user meant](images/00-cover.png)
+![Cover: a transcript where the agent heard “handovers” and “collars” with confidence 1.00; the speaker said hamburgers and colas](images/00-cover.png)
 
 You're at a drive-thru. You order a cheeseburger and a chocolate shake, then add: *“Make that two.”*
 
