@@ -150,6 +150,6 @@ None of the individual ideas is new. Confirming only when unsure goes back decad
 5. **Budget the questions.** Users tolerate about one clarifying question per task. Spend them on what's critical and ambiguous, and read back whatever is left.
 6. **Log everything as events, then replay.** That's how you find bugs like “Tacolas” and prove a fix works without recording anything new.
 
-The code, the 12 scenarios, the recording studio, and both evaluations are open source: **[link to repository]**.
+The code, the 12 scenarios, the recording studio, and both evaluations are open source: **[github.com/UniqueRed/quoth](https://github.com/UniqueRed/quoth)**.
 
 *Built with Deepgram Flux for streaming speech recognition and Claude for interpretation. SLURP audio is licensed CC BY-NC 4.0.*
