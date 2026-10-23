@@ -10,6 +10,7 @@
 | File | Where | Caption to paste |
 |---|---|---|
 | `00-cover.png` | Top (the Medium cover image) | none |
+| `00-cover-light.png` | Alternative to `00-cover.png`: the same cover in light mode. Use one or the other | none |
 | `01-pipeline.png` | "How Quoth works" | The LLM proposes. Deterministic code decides. Every step is logged. |
 | `07-recording-studio.png` | "Test 2", after the scenario list | A small local web app runs each scripted session live and scores it the moment it ends. |
 | `02-exact-orders-quiet-vs-noisy.png` | "Test 2", the headline result | Same speaker, same scripts. Noise barely touches Quoth and wrecks the naive agent. |

@@ -285,6 +285,7 @@ def main() -> None:
     fig_questions()
     fig_confidence()
     screenshot(SRC / "cover.html", "00-cover.png", 1400, 700)
+    screenshot(SRC / "cover-light.html", "00-cover-light.png", 1400, 700)
     screenshot(SRC / "pipeline.html", "01-pipeline.png", 1200, 664)
     screenshot(SRC / "conversation.html", "06-noisy-conversation.png", 1100, 900)
     screenshot(studio_page(), "07-recording-studio.png", 1440, 900)
