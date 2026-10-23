@@ -28,7 +28,6 @@ Medium does not read Markdown; pasting `article.md` leaves raw `**` and `##` in 
 2. In a new Medium story, copy the **title** and **subtitle** from the page into Medium's title and subtitle lines.
 3. Click **Copy article body**, click on the empty line under the subtitle in Medium, and paste. Headings, bold, italics, lists and the code block come through as Medium formatting.
 4. Images: each one is a yellow "IMAGE: upload …" line. Click that line, delete its text, press `+`, choose the image icon, and upload the named file from `article/images/`. Paste the caption from the same line into the image's caption field. Upload `00-cover.png` first, just above the first paragraph; Medium uses the first image as the story preview.
-5. Replace `[link to repository]` with your repo URL.
 
 ## Things to decide before posting
 
